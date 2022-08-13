@@ -3,10 +3,18 @@ require("dotenv").config();
 const { API_KEY } = process.env;
 
 const getVideogames = async (req, res) => {
+  const { name } = req.query;
   const quantity = 100;
   let videogamesApi = [];
 
   try {
+    if (name) {
+      const nameVideogame = await axios.get(
+        `https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`
+      );
+
+      return res.send(nameVideogame.data.results.slice(0, 15));
+    }
     const api = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`);
     videogamesApi = [...api.data.results];
 
@@ -36,14 +44,21 @@ const getVideogames = async (req, res) => {
 
     // Format
     videogamesApi = videogamesApi.map((char) => {
-      const { id, name, genres, rating, platforms, background_image } = char;
+      const {
+        id,
+        name,
+        genres,
+        rating,
+        platforms,
+        background_image: image,
+      } = char;
       const obj = {
         id,
         name,
         genres: genres ? genres.map((g) => g.name) : null,
         rating,
         platforms: platforms ? platforms.map((p) => p.platform.name) : null,
-        background_image,
+        image,
       };
 
       return obj;
