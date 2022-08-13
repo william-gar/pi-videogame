@@ -80,7 +80,7 @@ const getVideogamesDb = async () => {
 };
 // ------------------------------------------------------------------------------
 
-// GET VIDEOGAMES BY NAME API--------------------------------------------------------
+// GET VIDEOGAMES BY NAME API----------------------------------------------------
 const getVideogamesApiByName = async (name, quantity) => {
   let videogamesByName = await axios(
     `https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`
@@ -92,7 +92,7 @@ const getVideogamesApiByName = async (name, quantity) => {
 };
 // ------------------------------------------------------------------------------
 
-// GET ALL VIDEOGAMES - API + DB ------------------------------------------------
+// GET ALL VIDEOGAMES - API + DB & BY NAME --------------------------------------
 const getAllVideogames = async (req, res) => {
   let { name } = req.query;
 
@@ -134,6 +134,30 @@ const getAllVideogames = async (req, res) => {
   return res.send(allVideogames);
 };
 // -----------------------------------------------------------------------------
+
+// GET VIDEOGAME BY ID ---------------------------------------------------------
+
+const getVideogameApiById = async (id) => {
+  let videogame = await axios(
+    `https://api.rawg.io/api/games/${id}?key=${API_KEY}`
+  );
+
+  videogame = videogame.data.map((info) => {
+    const { id, name, rating, genres, description, released, platforms } = info;
+
+    const obj = {
+      id,
+      name,
+      rating,
+      genres: genres.map((g) => g.name),
+      description,
+      released,
+      platforms: platforms.map((e) => e.platform.name),
+    };
+
+    return obj;
+  });
+};
 
 module.exports = {
   getAllVideogames,
