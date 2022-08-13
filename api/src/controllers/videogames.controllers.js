@@ -1,21 +1,16 @@
 const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
+const { Videogame, Genre } = require("../db");
 
-const getVideogames = async (req, res) => {
-  const { name } = req.query;
+// VIDEOGAMES - API--------------------------------------------------------------
+const getVideogamesApi = async (req, res) => {
   const quantity = 100;
   let videogamesApi = [];
 
   try {
-    if (name) {
-      const nameVideogame = await axios.get(
-        `https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`
-      );
-
-      return res.send(nameVideogame.data.results.slice(0, 15));
-    }
     const api = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`);
+
     videogamesApi = [...api.data.results];
 
     // Get more than 20 characters. Change value in constant quantity.
@@ -63,15 +58,83 @@ const getVideogames = async (req, res) => {
 
       return obj;
     });
-    console.log(videogamesApi.length);
-    return res.send(videogamesApi);
+
+    return videogamesApi;
   } catch (error) {
-    console.log(`Error getting characters from API: ${error}`);
+    throw new Error(`Error getting characters from API: ${error}`);
+  }
+};
+//-------------------------------------------------------------------------------
+
+// VIDEOGAMES - DataBase --------------------------------------------------------
+const getVideogamesDb = async () => {
+  try {
+    const videogamesDb = await Videogame.findAll({
+      include: [{ model: Genre }],
+    });
+
+    return videogamesDb;
+  } catch (error) {
+    console.log(error);
+  }
+};
+// ------------------------------------------------------------------------------
+
+// GET VIDEOGAMES BY NAME API--------------------------------------------------------
+const getVideogamesApiByName = async (name, quantity) => {
+  let videogamesByName = await axios(
+    `https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`
+  );
+
+  videogamesByName = videogamesByName.data.results.slice(0, quantity);
+
+  return videogamesByName;
+};
+// ------------------------------------------------------------------------------
+
+// GET ALL VIDEOGAMES - API + DB ------------------------------------------------
+const getAllVideogames = async (req, res) => {
+  let { name } = req.query;
+
+  const apiVideogames = await getVideogamesApi();
+  const dbVideogames = await getVideogamesDb();
+
+  if (name) {
+    name = name.toLowerCase();
+    let quantity = 15;
+
+    const nameDb = dbVideogames.filter((game) =>
+      game.name.toLowerCase.includes(name)
+    );
+
+    if (nameDb) {
+      quantity = 15 - nameDb.length;
+    }
+
+    let videogames = await getVideogamesApiByName(name, quantity);
+
+    videogames = [...nameDb, ...videogames];
+
+    videogames = videogames.map((game) => {
+      const { id, name, genres, rating } = game;
+      const obj = {
+        id,
+        name,
+        genres: genres.map((g) => g.name),
+        rating,
+      };
+      return obj;
+    });
+
+    return res.send(videogames);
   }
 
-  //   return res.send(api.data.results);
+  const allVideogames = [...apiVideogames, ...dbVideogames];
+
+  return res.send(allVideogames);
 };
+// -----------------------------------------------------------------------------
 
 module.exports = {
-  getVideogames,
+  getAllVideogames,
 };
