@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Genre } = require("../db");
-require("dotenv").config();
+// require("dotenv").config();
 const { API_KEY } = process.env;
 
 const loadGenres = async (db = false) => {
