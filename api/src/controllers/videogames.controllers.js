@@ -135,30 +135,60 @@ const getAllVideogames = async (req, res) => {
 };
 // -----------------------------------------------------------------------------
 
-// GET VIDEOGAME BY ID ---------------------------------------------------------
+// GET VIDEOGAME API - BY ID ---------------------------------------------------
+const getVideogameApiById = async (idVideogame) => {
+  try {
+    let videogame = await axios(
+      `https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`
+    );
 
-const getVideogameApiById = async (id) => {
-  let videogame = await axios(
-    `https://api.rawg.io/api/games/${id}?key=${API_KEY}`
-  );
+    if (!videogame) return `Game with id:${idVideogame} Not Found`;
 
-  videogame = videogame.data.map((info) => {
-    const { id, name, rating, genres, description, released, platforms } = info;
+    const { id, name, rating, genres, description, released, platforms } =
+      videogame.data;
 
-    const obj = {
+    const objVideogame = {
       id,
       name,
       rating,
-      genres: genres.map((g) => g.name),
+      genres: genres ? genres.map((g) => g.name) : null,
       description,
       released,
-      platforms: platforms.map((e) => e.platform.name),
+      platforms: platforms ? platforms.map((p) => p.platform.name) : null,
     };
 
-    return obj;
-  });
+    return objVideogame;
+  } catch (error) {
+    console.log(`An Error ocurred, ${error}`);
+    return `Videogame with id: ${idVideogame} Not Found.`;
+  }
+};
+
+// GET VIDEOGAME BY ID --------------------------------------------------------
+const getVideogameById = async (req, res) => {
+  const { idVideogame } = req.params;
+
+  try {
+    if (idVideogame) {
+      const dbVideogames = await getVideogamesDb();
+
+      const videoGameFoundDb = dbVideogames.find(
+        (game) => game.id == idVideogame
+      );
+
+      if (videoGameFoundDb) return res.status(200).send(videoGameFoundDb);
+
+      const videoGameFoundApi = await getVideogameApiById(idVideogame);
+
+      return res.status(200).send(videoGameFoundApi);
+    }
+  } catch (error) {
+    // console.log(error);
+    return res.status(404).send(videoGameFoundApi);
+  }
 };
 
 module.exports = {
   getAllVideogames,
+  getVideogameById,
 };
