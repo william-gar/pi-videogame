@@ -25,11 +25,24 @@ const loadGenres = async (db = false) => {
 
   return genres;
 };
+// --------------------------------------------------------
 
-// GET - GENRES
+// GET - GENRES -------------------------------------------
 const getGenres = async (req, res) => {
-  //
+  try {
+    // const genres = await loadGenres();
+
+    const genres = await Genre.findAll();
+
+    // console.log(`Genres length: ${genres.length}`);
+
+    return res.status(200).send(genres);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
 };
+// --------------------------------------------------------
+
 module.exports = {
   loadGenres,
   getGenres,
