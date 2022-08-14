@@ -104,7 +104,7 @@ const getAllVideogames = async (req, res) => {
     let quantity = 15;
 
     const nameDb = dbVideogames.filter((game) =>
-      game.name.toLowerCase.includes(name)
+      game.name.toLowerCase().includes(name)
     );
 
     if (nameDb) {
@@ -188,7 +188,34 @@ const getVideogameById = async (req, res) => {
   }
 };
 
+// POST VIDEOGAME -------------------------------------------------------------
+const postVideogame = async (req, res) => {
+  const { name, description, released, rating, platforms, image, genres } =
+    req.body;
+
+  const validator =
+    name && description && released && rating && platforms && image
+      ? true
+      : false;
+
+  if (!validator) return res.status(400).send(`Some data is missing!`);
+
+  try {
+    const obj = { name, description, released, rating, platforms, image };
+
+    const newVideogame = await Videogame.create(obj);
+
+    newVideogame.addGenres(genres);
+
+    return res.status(200).send(`${name} videogame create successfully!`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+//---------------------------------------------------------
+
 module.exports = {
   getAllVideogames,
   getVideogameById,
+  postVideogame,
 };
