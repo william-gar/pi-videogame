@@ -19,7 +19,7 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
-const axios = require("axios");
+// const axios = require("axios");
 const { loadGenres } = require("./src/controllers/genres.controllers");
 
 // Syncing all the models at once.
