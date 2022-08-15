@@ -69,8 +69,12 @@ const getVideogamesApi = async (req, res) => {
 // VIDEOGAMES - DataBase --------------------------------------------------------
 const getVideogamesDb = async () => {
   try {
-    const videogamesDb = await Videogame.findAll({
-      include: [{ model: Genre }],
+    let videogamesDb = await Videogame.findAll({
+      include: {
+        model: Genre,
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
     });
 
     return videogamesDb;
