@@ -21,7 +21,9 @@ const loadGenres = async (db = false) => {
     return obj;
   });
 
-  if (db) await Genre.bulkCreate(genres);
+  const genresExist = await Genre.findAll();
+
+  if (db && !genresExist) await Genre.bulkCreate(genres);
 
   return genres;
 };

@@ -23,7 +23,7 @@ const { conn } = require("./src/db.js");
 const { loadGenres } = require("./src/controllers/genres.controllers");
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(async () => {
+conn.sync({ force: false }).then(async () => {
   await loadGenres(true);
   server.listen(3001, () => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
