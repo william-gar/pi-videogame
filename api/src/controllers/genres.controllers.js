@@ -6,22 +6,24 @@ const { API_KEY } = process.env;
 const loadGenres = async (db = false) => {
   let genres = [];
 
-  const api = await axios(`https://api.rawg.io/api/genres?key=${API_KEY}`);
-
-  genres = [...api.data.results];
-
-  // Filter - Info
-  genres = genres.map((genre) => {
-    const { id, name } = genre;
-    const obj = {
-      id,
-      name,
-    };
-
-    return obj;
-  });
-
   const genresExist = await Genre.findAll();
+
+  if (!genresExist) {
+    const api = await axios(`https://api.rawg.io/api/genres?key=${API_KEY}`);
+
+    genres = [...api.data.results];
+
+    // Filter - Info
+    genres = genres.map((genre) => {
+      const { id, name } = genre;
+      const obj = {
+        id,
+        name,
+      };
+
+      return obj;
+    });
+  }
 
   if (db && !genresExist) await Genre.bulkCreate(genres);
 
