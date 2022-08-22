@@ -1,0 +1,42 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: monospace;
+  font-size: 25px;
+  color: rgb(222, 235, 241);
+  text-shadow: -4px -2px #222;
+  gap: 0px;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: linear-gradient(
+      to left,
+      hsla(207, 38%, 40%, 0.747),
+      hsla(202, 34%, 25%, 0.767)
+    ),
+    url("https://c.tenor.com/mhEOwpHpI94AAAAC/gaming-gamer.gif");
+
+  justify-content: center;
+}
+
+.container h1 {
+  font-family: monospace;
+  font-weight: normal;
+  text-shadow: 5px 5px 5px #000;
+}
+
+.buttonHome {
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid #999;
+  background-color: #22222225;
+  color: #fff;
+}
+
+.buttonHome:hover {
+  background-color: #22222290;
+  transition: 0.5s;
+  cursor: pointer;
+}
