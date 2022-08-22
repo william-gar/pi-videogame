@@ -1,0 +1,29 @@
+.pagination {
+  position: fixed;
+  top: 220px;
+  right: 15px;
+}
+
+.pagination ul {
+  list-style: none;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  display: block;
+  padding: 8px;
+}
+
+.pagination ul li {
+  border: 1px solid #aaa;
+  font-size: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #777777;
+  color: #ffff0090;
+  padding: 0 5px;
+}
+
+.pagination ul li:hover {
+  cursor: pointer;
+  background-color: #222222;
+  color: #ffff00;
+  transition: 0.3s;
+}
