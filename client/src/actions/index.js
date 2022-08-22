@@ -1,11 +1,12 @@
 import axios from "axios";
+import { GET_VIDEOGAMES } from "../types";
 
 export function getVideogames() {
   return async function (dispatch) {
     let json = await axios(`http://localhost:3001/videogames`);
 
     return dispatch({
-      type: "GET_VIDEOGAMES",
+      type: GET_VIDEOGAMES,
       payload: json.data,
     });
   };
