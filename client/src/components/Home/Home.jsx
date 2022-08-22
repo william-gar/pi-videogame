@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getVideogames } from "../../actions/index";
@@ -9,6 +9,21 @@ import style from "./Home.module.css";
 export default function Home() {
   const dispatch = useDispatch();
   const allVideogames = useSelector((state) => state.videogames);
+
+  //Paginado ------------------------------
+  const [currentPage, setCurrentPage] = useState(1);
+  const [videogamesPerPage, setVideogamesPerPage] = useState(15);
+  const indexOfLastVideogame = currentPage * videogamesPerPage; //15
+  const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; // 0
+  const currentVideogames = allVideogames.slice(
+    indexOfFirstVideogame,
+    indexOfLastVideogame
+  );
+
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  //---------------------------------------
 
   useEffect(() => {
     dispatch(getVideogames());
