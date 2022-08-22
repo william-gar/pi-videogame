@@ -1,0 +1,53 @@
+import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getVideogames } from "../../actions/index";
+import { Card } from "../Card/Card";
+import style from "./Home.module.css";
+
+export default function Home() {
+  const dispatch = useDispatch();
+  const allVideogames = useSelector((state) => state.videogames);
+
+  useEffect(() => {
+    dispatch(getVideogames());
+  }, []);
+
+  return (
+    <div>
+      {allVideogames.length === 0 ? (
+        <div className={style.loading}>
+          <img
+            src="https://i.gifer.com/origin/ac/acf3abb6da430dd78cc99f925bb52d49.gif"
+            alt="img-loading"
+          />
+          <div>
+            <h3>Loading...</h3>
+          </div>
+        </div>
+      ) : (
+        <div className={style.cards}>
+          {allVideogames?.map((el) => {
+            return (
+              <fragment>
+                <Link to={"/home/" + el.id} className={style.linkCard}>
+                  <Card
+                    name={el.name}
+                    image={el.image}
+                    rating={el.rating}
+                    key={el.id}
+                    genres={el.genres.map((el) => {
+                      if (typeof el === "string") return ` ${el}`;
+                      else return ` ${el.name}`;
+                    })}
+                  />
+                </Link>
+              </fragment>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}

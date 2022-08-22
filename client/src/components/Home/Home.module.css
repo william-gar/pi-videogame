@@ -1,0 +1,30 @@
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  background-color: #ffeeff;
+}
+
+.linkCard {
+  text-decoration: none;
+}
+
+.loading {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(5, 4, 5);
+}
+
+.loading img {
+  width: 200px;
+  height: 200px;
+}
+
+.loading h3 {
+  color: #fff;
+}
