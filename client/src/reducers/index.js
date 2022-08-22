@@ -1,3 +1,5 @@
+import { GET_VIDEOGAMES } from "../types";
+
 const initialState = {
   videogames: [],
   genres: [],
@@ -5,7 +7,7 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case "GET_VIDEOGAMES":
+    case GET_VIDEOGAMES:
       return {
         ...state,
         videogames: action.payload,
