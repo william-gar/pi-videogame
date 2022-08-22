@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { getVideogames } from "../../actions/index";
 import { Card } from "../Card/Card";
 import style from "./Home.module.css";
+import Pagination from "../Pagination/Pagination";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -31,6 +32,11 @@ export default function Home() {
 
   return (
     <div>
+      <Pagination
+        videogamesPerPage={videogamesPerPage}
+        allVideogames={allVideogames.length}
+        paginado={paginado}
+      />
       {allVideogames.length === 0 ? (
         <div className={style.loading}>
           <img
@@ -43,7 +49,7 @@ export default function Home() {
         </div>
       ) : (
         <div className={style.cards}>
-          {allVideogames?.map((el) => {
+          {currentVideogames?.map((el) => {
             return (
               <fragment>
                 <Link to={"/home/" + el.id} className={style.linkCard}>
