@@ -48,25 +48,36 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        <div className={style.cards}>
-          {currentVideogames?.map((el) => {
-            return (
-              <fragment>
-                <Link to={"/home/" + el.id} className={style.linkCard}>
-                  <Card
-                    name={el.name}
-                    image={el.image}
-                    rating={el.rating}
-                    key={el.id}
-                    genres={el.genres.map((el) => {
-                      if (typeof el === "string") return ` ${el}`;
-                      else return ` ${el.name}`;
-                    })}
-                  />
-                </Link>
-              </fragment>
-            );
-          })}
+        <div>
+          <div>
+            <select name="select" defaultValue="default">
+              <option disabled value="default">
+                Rating
+              </option>
+              <option value="low">Low to High</option>
+              <option value="high">High to Low</option>
+            </select>
+          </div>
+          <div className={style.cards}>
+            {currentVideogames?.map((el) => {
+              return (
+                <fragment>
+                  <Link to={"/home/" + el.id} className={style.linkCard}>
+                    <Card
+                      name={el.name}
+                      image={el.image}
+                      rating={el.rating}
+                      key={el.id}
+                      genres={el.genres.map((el) => {
+                        if (typeof el === "string") return ` ${el}`;
+                        else return ` ${el.name}`;
+                      })}
+                    />
+                  </Link>
+                </fragment>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
