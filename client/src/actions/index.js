@@ -4,6 +4,7 @@ import {
   GET_GENRES,
   FILTER_BY_GENRE,
   FILTER_BY_API_OR_DB,
+  ALPHABETICAL_SORT,
   SORT_BY_RATING,
 } from "../types";
 
@@ -39,6 +40,13 @@ export function filterByGenre(payload) {
 export function filterByApiOrDb(payload) {
   return {
     type: FILTER_BY_API_OR_DB,
+    payload,
+  };
+}
+
+export function alphabeticalSort(payload) {
+  return {
+    type: ALPHABETICAL_SORT,
     payload,
   };
 }

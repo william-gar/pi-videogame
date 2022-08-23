@@ -3,6 +3,7 @@ import {
   GET_GENRES,
   FILTER_BY_GENRE,
   FILTER_BY_API_OR_DB,
+  ALPHABETICAL_SORT,
   SORT_BY_RATING,
 } from "../types";
 
@@ -62,6 +63,25 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         videogames: [...apiOrDbFilter],
+      };
+
+    case ALPHABETICAL_SORT:
+      const alphabeticalSort =
+        action.payload === "a-z"
+          ? state.videogames.sort((a, b) => {
+              if (a.name > b.name) return 1;
+              if (b.name > a.name) return -1;
+              return 0;
+            })
+          : state.videogames.sort((a, b) => {
+              if (a.name > b.name) return -1;
+              if (b.name > a.name) return 1;
+              return 0;
+            });
+
+      return {
+        ...state,
+        videogames: [...alphabeticalSort],
       };
 
     case SORT_BY_RATING:

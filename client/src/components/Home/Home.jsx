@@ -7,6 +7,7 @@ import {
   getGenres,
   filterByGenre,
   filterByApiOrDb,
+  alphabeticalSort,
   sortByRating,
 } from "../../actions/index";
 import { Card } from "../Card/Card";
@@ -46,6 +47,11 @@ export default function Home() {
   function handleFilterByApiOrDb(e) {
     setCurrentPage(1);
     dispatch(filterByApiOrDb(e.target.value));
+  }
+
+  function handleAlphabeticalSort(e) {
+    setCurrentPage(1);
+    dispatch(alphabeticalSort(e.target.value));
   }
 
   function handleSortByRating(e) {
@@ -92,6 +98,18 @@ export default function Home() {
               <option value="all">ALL</option>
               <option value="api">API</option>
               <option value="database">DataBase</option>
+            </select>
+          </div>
+          <div>
+            <select
+              defaultValue="default"
+              onChange={(e) => handleAlphabeticalSort(e)}
+            >
+              <option disabled value="default">
+                Default
+              </option>
+              <option value="a-z">A - Z</option>
+              <option value="z-a">Z - A</option>
             </select>
           </div>
           <div>
