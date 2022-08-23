@@ -106,7 +106,7 @@ export default function Home() {
               onChange={(e) => handleAlphabeticalSort(e)}
             >
               <option disabled value="default">
-                Default
+                Alphabetical Sort
               </option>
               <option value="a-z">A - Z</option>
               <option value="z-a">Z - A</option>
