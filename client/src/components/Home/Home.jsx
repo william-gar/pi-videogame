@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getVideogames, sortByRating } from "../../actions/index";
+import { getVideogames, sortByRating, getGenres } from "../../actions/index";
 import { Card } from "../Card/Card";
 import style from "./Home.module.css";
 import Pagination from "../Pagination/Pagination";
@@ -10,6 +10,7 @@ import Pagination from "../Pagination/Pagination";
 export default function Home() {
   const dispatch = useDispatch();
   const allVideogames = useSelector((state) => state.videogames);
+  const allGenres = useSelector((state) => state.genres);
 
   //Paginado ------------------------------
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,6 +29,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getVideogames());
+    dispatch(getGenres());
   }, []);
 
   function handleSortByRating(e) {
@@ -55,6 +57,14 @@ export default function Home() {
         </div>
       ) : (
         <div>
+          <div>
+            <select defaultValue="default">
+              <option value="All Genres">All Genres</option>
+              {allGenres?.map((el) => {
+                return <option value={el.name}>{el.name}</option>;
+              })}
+            </select>
+          </div>
           <div>
             <select
               name="select"

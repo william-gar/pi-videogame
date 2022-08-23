@@ -1,4 +1,4 @@
-import { GET_VIDEOGAMES, SORT_BY_RATING } from "../types";
+import { GET_VIDEOGAMES, SORT_BY_RATING, GET_GENRES } from "../types";
 
 const initialState = {
   videogames: [],
@@ -13,6 +13,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         videogames: action.payload,
         allVideogames: action.payload,
+      };
+
+    case GET_GENRES:
+      return {
+        ...state,
+        genres: action.payload,
       };
 
     case SORT_BY_RATING:
