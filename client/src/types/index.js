@@ -1,1 +1,2 @@
 export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
+export const SORT_BY_RATING = "SORT_BY_RATING";
