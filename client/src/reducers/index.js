@@ -1,7 +1,8 @@
-import { GET_VIDEOGAMES } from "../types";
+import { GET_VIDEOGAMES, SORT_BY_RATING } from "../types";
 
 const initialState = {
   videogames: [],
+  allVideogames: [],
   genres: [],
 };
 
@@ -11,8 +12,27 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         videogames: action.payload,
+        allVideogames: action.payload,
       };
 
+    case SORT_BY_RATING:
+      const ratingSort =
+        action.payload === "low"
+          ? state.allVideogames.sort((a, b) => {
+              if (a.rating > b.rating) return 1;
+              if (b.rating > a.rating) return -1;
+              return 0;
+            })
+          : state.allVideogames.sort((a, b) => {
+              if (a.rating > b.rating) return -1;
+              if (b.rating > a.rating) return 1;
+              return 0;
+            });
+
+      return {
+        ...state,
+        videogames: [...ratingSort],
+      };
     default:
       return state;
   }
