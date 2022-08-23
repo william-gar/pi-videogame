@@ -7,3 +7,5 @@ export const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
+// store.subscribe(() => console.log("Cambio en el Estado"));
