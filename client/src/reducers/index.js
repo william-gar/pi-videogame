@@ -2,6 +2,7 @@ import {
   GET_VIDEOGAMES,
   GET_GENRES,
   FILTER_BY_GENRE,
+  FILTER_BY_API_OR_DB,
   SORT_BY_RATING,
 } from "../types";
 
@@ -45,6 +46,22 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         videogames: [...genreFilter],
+      };
+
+    case FILTER_BY_API_OR_DB:
+      let apiOrDbFilter;
+
+      if (action.payload === "all") {
+        apiOrDbFilter = state.allVideogames;
+      } else if (action.payload === "database") {
+        apiOrDbFilter = state.allVideogames.filter((e) => e.createdInDb);
+      } else {
+        apiOrDbFilter = state.allVideogames.filter((e) => !e.createdInDb);
+      }
+
+      return {
+        ...state,
+        videogames: [...apiOrDbFilter],
       };
 
     case SORT_BY_RATING:

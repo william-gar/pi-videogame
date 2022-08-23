@@ -6,6 +6,7 @@ import {
   getVideogames,
   getGenres,
   filterByGenre,
+  filterByApiOrDb,
   sortByRating,
 } from "../../actions/index";
 import { Card } from "../Card/Card";
@@ -42,6 +43,11 @@ export default function Home() {
     dispatch(filterByGenre(e.target.value));
   }
 
+  function handleFilterByApiOrDb(e) {
+    setCurrentPage(1);
+    dispatch(filterByApiOrDb(e.target.value));
+  }
+
   function handleSortByRating(e) {
     // e.preventDefault();
     setCurrentPage(1);
@@ -76,6 +82,16 @@ export default function Home() {
               {allGenres?.map((el) => {
                 return <option value={el.name}>{el.name}</option>;
               })}
+            </select>
+          </div>
+          <div>
+            <select
+              defaultValue="default"
+              onChange={(e) => handleFilterByApiOrDb(e)}
+            >
+              <option value="all">ALL</option>
+              <option value="api">API</option>
+              <option value="database">DataBase</option>
             </select>
           </div>
           <div>

@@ -3,6 +3,7 @@ import {
   GET_VIDEOGAMES,
   GET_GENRES,
   FILTER_BY_GENRE,
+  FILTER_BY_API_OR_DB,
   SORT_BY_RATING,
 } from "../types";
 
@@ -31,6 +32,13 @@ export function getGenres() {
 export function filterByGenre(payload) {
   return {
     type: FILTER_BY_GENRE,
+    payload,
+  };
+}
+
+export function filterByApiOrDb(payload) {
+  return {
+    type: FILTER_BY_API_OR_DB,
     payload,
   };
 }
