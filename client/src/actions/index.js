@@ -1,5 +1,10 @@
 import axios from "axios";
-import { GET_VIDEOGAMES, SORT_BY_RATING, GET_GENRES } from "../types";
+import {
+  GET_VIDEOGAMES,
+  GET_GENRES,
+  FILTER_BY_GENRE,
+  SORT_BY_RATING,
+} from "../types";
 
 export function getVideogames() {
   return async function (dispatch) {
@@ -20,6 +25,13 @@ export function getGenres() {
       type: GET_GENRES,
       payload: genres.data,
     });
+  };
+}
+
+export function filterByGenre(payload) {
+  return {
+    type: FILTER_BY_GENRE,
+    payload,
   };
 }
 

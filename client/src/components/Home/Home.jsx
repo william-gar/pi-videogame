@@ -2,7 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getVideogames, sortByRating, getGenres } from "../../actions/index";
+import {
+  getVideogames,
+  getGenres,
+  filterByGenre,
+  sortByRating,
+} from "../../actions/index";
 import { Card } from "../Card/Card";
 import style from "./Home.module.css";
 import Pagination from "../Pagination/Pagination";
@@ -32,6 +37,11 @@ export default function Home() {
     dispatch(getGenres());
   }, []);
 
+  function handleFilterByGenre(e) {
+    setCurrentPage(1);
+    dispatch(filterByGenre(e.target.value));
+  }
+
   function handleSortByRating(e) {
     // e.preventDefault();
     setCurrentPage(1);
@@ -58,7 +68,10 @@ export default function Home() {
       ) : (
         <div>
           <div>
-            <select defaultValue="default">
+            <select
+              defaultValue="default"
+              onChange={(e) => handleFilterByGenre(e)}
+            >
               <option value="All Genres">All Genres</option>
               {allGenres?.map((el) => {
                 return <option value={el.name}>{el.name}</option>;
