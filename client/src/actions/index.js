@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_VIDEOGAMES } from "../types";
+import { GET_VIDEOGAMES, SORT_BY_RATING } from "../types";
 
 export function getVideogames() {
   return async function (dispatch) {
@@ -9,6 +9,13 @@ export function getVideogames() {
       type: GET_VIDEOGAMES,
       payload: json.data,
     });
+  };
+}
+
+export function sortByRating(payload) {
+  return {
+    type: SORT_BY_RATING,
+    payload,
   };
 }
 
