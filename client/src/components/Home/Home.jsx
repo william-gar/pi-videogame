@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getVideogames } from "../../actions/index";
+import { getVideogames, sortByRating } from "../../actions/index";
 import { Card } from "../Card/Card";
 import style from "./Home.module.css";
 import Pagination from "../Pagination/Pagination";
@@ -30,6 +30,12 @@ export default function Home() {
     dispatch(getVideogames());
   }, []);
 
+  function handleSortByRating(e) {
+    // e.preventDefault();
+    setCurrentPage(1);
+    dispatch(sortByRating(e.target.value));
+  }
+
   return (
     <div>
       <Pagination
@@ -50,7 +56,11 @@ export default function Home() {
       ) : (
         <div>
           <div>
-            <select name="select" defaultValue="default">
+            <select
+              name="select"
+              defaultValue="default"
+              onChange={(e) => handleSortByRating(e)}
+            >
               <option disabled value="default">
                 Rating
               </option>
