@@ -13,6 +13,7 @@ import {
 import { Card } from "../Card/Card";
 import style from "./Home.module.css";
 import Pagination from "../Pagination/Pagination";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -124,6 +125,9 @@ export default function Home() {
               <option value="low">Low to High</option>
               <option value="high">High to Low</option>
             </select>
+          </div>
+          <div>
+            <SearchBar />
           </div>
           <div className={style.cards}>
             {currentVideogames?.map((el) => {
