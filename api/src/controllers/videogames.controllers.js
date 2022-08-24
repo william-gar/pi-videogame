@@ -107,7 +107,7 @@ const getAllVideogames = async (req, res) => {
     name = name.toLowerCase();
     let quantity = 15;
 
-    const nameDb = dbVideogames.filter((game) =>
+    let nameDb = dbVideogames.filter((game) =>
       game.name.toLowerCase().includes(name)
     );
 
@@ -116,8 +116,6 @@ const getAllVideogames = async (req, res) => {
     }
 
     let videogames = await getVideogamesApiByName(name, quantity);
-
-    videogames = [...nameDb, ...videogames];
 
     videogames = videogames.map((game) => {
       const { id, name, background_image: image, genres, rating } = game;
@@ -130,6 +128,20 @@ const getAllVideogames = async (req, res) => {
       };
       return obj;
     });
+
+    nameDb = nameDb.map((game) => {
+      const { id, name, image, genres, rating } = game;
+      const obj = {
+        id,
+        name,
+        image,
+        genres: genres.map((g) => g.name),
+        rating,
+      };
+      return obj;
+    });
+
+    videogames = [...nameDb, ...videogames];
 
     return res.send(videogames);
   }
