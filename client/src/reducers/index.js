@@ -5,6 +5,7 @@ import {
   FILTER_BY_API_OR_DB,
   ALPHABETICAL_SORT,
   SORT_BY_RATING,
+  GET_VIDEOGAMES_BY_NAME,
 } from "../types";
 
 const initialState = {
@@ -28,6 +29,13 @@ function rootReducer(state = initialState, action) {
         genres: action.payload,
       };
 
+    case GET_VIDEOGAMES_BY_NAME:
+      console.log(state.videogamesByName);
+      return {
+        ...state,
+        videogames: [...action.payload],
+      };
+
     case FILTER_BY_GENRE:
       let genreFilter;
 
@@ -43,7 +51,7 @@ function rootReducer(state = initialState, action) {
 
         genreFilter = vGames.filter((el) => el.genres.includes(action.payload));
       }
-
+      console.log(state.genres);
       return {
         ...state,
         videogames: [...genreFilter],

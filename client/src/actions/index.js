@@ -6,6 +6,7 @@ import {
   FILTER_BY_API_OR_DB,
   ALPHABETICAL_SORT,
   SORT_BY_RATING,
+  GET_VIDEOGAMES_BY_NAME,
 } from "../types";
 
 export function getVideogames() {
@@ -55,6 +56,19 @@ export function sortByRating(payload) {
   return {
     type: SORT_BY_RATING,
     payload,
+  };
+}
+
+export function getVideogamesByName(name) {
+  return async function (dispatch) {
+    let videogamesByName = await axios(
+      `http://localhost:3001/videogames?name=${name}`
+    );
+
+    return dispatch({
+      type: GET_VIDEOGAMES_BY_NAME,
+      payload: videogamesByName.data,
+    });
   };
 }
 
