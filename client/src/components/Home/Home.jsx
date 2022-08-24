@@ -38,7 +38,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getVideogames());
     dispatch(getGenres());
-  }, []);
+  }, [dispatch]);
 
   function handleFilterByGenre(e) {
     setCurrentPage(1);
