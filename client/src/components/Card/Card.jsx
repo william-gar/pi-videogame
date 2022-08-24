@@ -23,7 +23,9 @@ export const Card = ({ name, image, rating, genres }) => {
           <h3>{rating}</h3>
         </div>
         <div>
-          <h4>{rating ? stars.slice(0, Math.floor(rating)).join("") : null}</h4>
+          <h4>
+            {rating ? stars.slice(0, Math.floor(rating)).join("") : `---`}
+          </h4>
         </div>
       </div>
       <div className={style.cardGenres}>
