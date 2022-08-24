@@ -120,10 +120,11 @@ const getAllVideogames = async (req, res) => {
     videogames = [...nameDb, ...videogames];
 
     videogames = videogames.map((game) => {
-      const { id, name, genres, rating } = game;
+      const { id, name, background_image: image, genres, rating } = game;
       const obj = {
         id,
         name,
+        image,
         genres: genres.map((g) => g.name),
         rating,
       };
@@ -148,12 +149,21 @@ const getVideogameApiById = async (idVideogame) => {
 
     if (!videogame) return `Game with id:${idVideogame} Not Found`;
 
-    const { id, name, rating, genres, description, released, platforms } =
-      videogame.data;
+    const {
+      id,
+      name,
+      background_image: image,
+      rating,
+      genres,
+      description,
+      released,
+      platforms,
+    } = videogame.data;
 
     const objVideogame = {
       id,
       name,
+      image,
       rating,
       genres: genres ? genres.map((g) => g.name) : null,
       description,
