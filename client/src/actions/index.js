@@ -7,6 +7,8 @@ import {
   ALPHABETICAL_SORT,
   SORT_BY_RATING,
   GET_VIDEOGAMES_BY_NAME,
+  GET_DETAIL_VIDEOGAME,
+  RESET_DETAIL,
 } from "../types";
 
 export function getVideogames() {
@@ -69,6 +71,29 @@ export function getVideogamesByName(name) {
       type: GET_VIDEOGAMES_BY_NAME,
       payload: videogamesByName.data,
     });
+  };
+}
+
+export function getDetailVideogame(id) {
+  return async function (dispatch) {
+    try {
+      let videogameById = await axios.get(
+        `http://localhost:3001/videogames/${id}`
+      );
+
+      return dispatch({
+        type: GET_DETAIL_VIDEOGAME,
+        payload: videogameById.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function resetDetail() {
+  return {
+    type: RESET_DETAIL,
   };
 }
 

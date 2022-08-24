@@ -6,12 +6,15 @@ import {
   ALPHABETICAL_SORT,
   SORT_BY_RATING,
   GET_VIDEOGAMES_BY_NAME,
+  GET_DETAIL_VIDEOGAME,
+  RESET_DETAIL,
 } from "../types";
 
 const initialState = {
   videogames: [],
   allVideogames: [],
   genres: [],
+  detail: {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -30,7 +33,7 @@ function rootReducer(state = initialState, action) {
       };
 
     case GET_VIDEOGAMES_BY_NAME:
-      console.log(state.videogamesByName);
+      // console.log(state.videogamesByName);
       return {
         ...state,
         videogames: [...action.payload],
@@ -110,6 +113,21 @@ function rootReducer(state = initialState, action) {
         ...state,
         videogames: [...ratingSort],
       };
+
+    case GET_DETAIL_VIDEOGAME:
+      // console.log(action.payload);
+      // state.detail = {};
+      return {
+        ...state,
+        detail: action.payload,
+      };
+
+    case RESET_DETAIL:
+      return {
+        ...state,
+        detail: {},
+      };
+
     default:
       return state;
   }
