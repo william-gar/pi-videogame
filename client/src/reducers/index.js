@@ -115,26 +115,26 @@ function rootReducer(state = initialState, action) {
       };
 
     case GET_DETAIL_VIDEOGAME:
-      let arreglo = action.payload;
+      let videogameInfo = action.payload;
 
-      if (arreglo.genres.length) {
-        arreglo.genres =
-          typeof arreglo.genres[0] !== "string"
-            ? arreglo.genres.map((g) => g.name).join(", ")
-            : arreglo.genres.join(", ");
+      if (videogameInfo.genres.length) {
+        videogameInfo.genres =
+          typeof videogameInfo.genres[0] !== "string"
+            ? videogameInfo.genres.map((g) => g.name).join(", ")
+            : videogameInfo.genres.join(", ");
       } else {
-        arreglo.genres = `No Genres`;
+        videogameInfo.genres = `No Genres`;
       }
 
-      if (arreglo.platforms.length) {
-        arreglo.platforms = arreglo.platforms.join(", ");
+      if (videogameInfo.platforms.length) {
+        videogameInfo.platforms = videogameInfo.platforms.join(", ");
       } else {
-        arreglo.platforms = `No Platforms`;
+        videogameInfo.platforms = `No Platforms`;
       }
 
       return {
         ...state,
-        detail: arreglo,
+        detail: videogameInfo,
       };
 
     case RESET_DETAIL:
