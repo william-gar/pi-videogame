@@ -167,7 +167,7 @@ const getVideogameApiById = async (idVideogame) => {
       background_image: image,
       rating,
       genres,
-      description,
+      description_raw: description,
       released,
       platforms,
     } = videogame.data;
@@ -177,7 +177,7 @@ const getVideogameApiById = async (idVideogame) => {
       name,
       image,
       rating,
-      genres: genres ? genres.map((g) => g.name) : null,
+      genres: genres.map((g) => g.name),
       description,
       released,
       platforms: platforms ? platforms.map((p) => p.platform.name) : null,
