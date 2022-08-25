@@ -1,0 +1,136 @@
+.componentDetail {
+  background-color: #333;
+  height: 100vh;
+}
+
+.goBackDetail {
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  border: 1px solid #555;
+  color: #fff;
+  background-color: #222;
+  font-family: monospace;
+  font-size: 20px;
+}
+
+.goBackDetail:hover {
+  background-color: #111;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.containerDetail {
+  border: 1px solid #555;
+  border-radius: 10px;
+  display: flex;
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px;
+  color: #fff;
+  background-color: #222;
+}
+
+.imageDetail {
+  border: 1px solid #444;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.imageDetail img {
+  max-width: 700px;
+}
+
+.infoDetail {
+  text-align: start;
+  font-family: monospace;
+  padding-left: 20px;
+  padding-right: 10px;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #444;
+  border-radius: 5px;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+.ratingDetail {
+  border: 1px solid #444;
+  border-radius: 5px;
+  width: max-content;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.ratingDetail h3,
+.ratingDetail h4 {
+  margin: 0;
+}
+
+.genresDetail h3,
+.releasedDetail h4,
+.platformsDetail h4 {
+  font-size: 18px;
+}
+
+.genresDetail h3 span,
+.releasedDetail h4 span,
+.platformsDetail h4 span {
+  color: #bbb;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.containerDescriptionDetail {
+  background-color: #111;
+  border: 1px solid #444;
+  border-radius: 2px;
+
+  padding-right: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.descriptionDetail {
+  max-height: 250px;
+  overflow-y: scroll;
+  background-color: #111;
+}
+
+.descriptionDetail::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.descriptionDetail::-webkit-scrollbar:vertical {
+  width: 9px;
+}
+
+/* .descriptionDetail::-webkit-scrollbar-button:increment,
+.contenedor::-webkit-scrollbar-button {
+  display: none;
+} */
+
+/* .descriptionDetail::-webkit-scrollbar:horizontal {
+  width: 5px;
+} */
+
+.descriptionDetail::-webkit-scrollbar-thumb {
+  background-color: #313d47;
+  border-radius: 5px;
+  border: 1px solid #46701e;
+}
+
+.descriptionDetail::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.descriptionDetail p {
+  font-size: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 1px 15px;
+}
