@@ -14,7 +14,7 @@ const initialState = {
   videogames: [],
   allVideogames: [],
   genres: [],
-  detail: {},
+  detail: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -115,17 +115,32 @@ function rootReducer(state = initialState, action) {
       };
 
     case GET_DETAIL_VIDEOGAME:
-      // console.log(action.payload);
-      // state.detail = {};
+      let arreglo = action.payload;
+
+      if (arreglo.genres.length) {
+        arreglo.genres =
+          typeof arreglo.genres[0] !== "string"
+            ? arreglo.genres.map((g) => g.name).join(", ")
+            : arreglo.genres.join(", ");
+      } else {
+        arreglo.genres = `No Genres`;
+      }
+
+      if (arreglo.platforms.length) {
+        arreglo.platforms = arreglo.platforms.join(", ");
+      } else {
+        arreglo.platforms = `No Platforms`;
+      }
+
       return {
         ...state,
-        detail: action.payload,
+        detail: arreglo,
       };
 
     case RESET_DETAIL:
       return {
         ...state,
-        detail: {},
+        detail: [],
       };
 
     default:
