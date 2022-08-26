@@ -14,6 +14,7 @@ import { Card } from "../Card/Card";
 import style from "./Home.module.css";
 import Pagination from "../Pagination/Pagination";
 import SearchBar from "../SearchBar/SearchBar";
+import metalSlug from "../../assets/images/metal-slug.gif";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -62,7 +63,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className={style.containerAllHome}>
       <Pagination
         videogamesPerPage={videogamesPerPage}
         allVideogames={allVideogames.length}
@@ -70,10 +71,7 @@ export default function Home() {
       />
       {allVideogames.length === 0 ? (
         <div className={style.loading}>
-          <img
-            src="https://i.gifer.com/origin/ac/acf3abb6da430dd78cc99f925bb52d49.gif"
-            alt="img-loading"
-          />
+          <img src={metalSlug} alt="img-loading" />
           <div>
             <h3>Loading...</h3>
           </div>

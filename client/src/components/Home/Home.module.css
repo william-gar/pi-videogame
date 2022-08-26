@@ -1,10 +1,33 @@
+.containerAllHome {
+  height: 100%;
+  /* display: flex;
+  flex-direction: column;
+  font-family: monospace;
+  font-size: 25px;
+  color: rgb(222, 235, 241);
+  text-shadow: -4px -2px #222;
+  gap: 0px; */
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: linear-gradient(
+      to left,
+      hsla(207, 34%, 25%, 0.8),
+      hsla(202, 34%, 25%, 0.8)
+    ),
+    url("../../assets/images/background-home.jpg");
+
+  justify-content: center;
+}
+
 .cards {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
-  background-color: #ffeeff;
-  margin: 50px 0;
+  gap: 30px;
+  /* background-color: #ffeeff25; */
+  padding: 50px 0;
+  height: max-content;
 }
 
 .linkCard {
@@ -12,13 +35,14 @@
 }
 
 .loading {
-  width: 100%;
+  /* width: 500px; */
+  margin: auto;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(5, 4, 5);
+  /* background-color: #11111125; */
 }
 
 .loading img {
