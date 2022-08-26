@@ -1,5 +1,10 @@
 .componentDetail {
-  background-color: #333;
+  background-image: linear-gradient(
+      to left,
+      hsla(207, 43%, 18%, 0.8),
+      hsla(201, 25%, 23%, 0.8)
+    ),
+    url("../../assets/images/background-home.jpg");
   height: 100vh;
 }
 
@@ -30,6 +35,7 @@
   padding: 20px;
   color: #fff;
   background-color: #222;
+  justify-content: space-around;
 }
 
 .imageDetail {
@@ -37,6 +43,8 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
+  /* min-width: 50%; */
+  justify-content: center;
 }
 
 .imageDetail img {
@@ -133,4 +141,20 @@
   font-size: 18px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 1px 15px;
+}
+
+.loadingDetail {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: monospace;
+  font-size: 20px;
+}
+
+.loadingDetail img {
+  width: 200px;
+  height: 200px;
 }

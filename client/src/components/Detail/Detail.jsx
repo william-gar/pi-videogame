@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDetailVideogame, resetDetail } from "../../actions";
 import { useEffect } from "react";
 import style from "./Detail.module.css";
+import marioGif from "../../assets/images/mario.gif";
+import defaultImage from "../../assets/images/default-image-detail.png";
 const stars = ["⭐", "⭐", "⭐", "⭐", "⭐"];
 
 export default function Detail(props) {
@@ -34,10 +36,10 @@ export default function Detail(props) {
         </button>
       </Link>
 
-      {image ? (
+      {name ? (
         <div className={style.containerDetail}>
           <div className={style.imageDetail}>
-            <img src={image} alt={`pic-${name}`} />
+            <img src={image ? image : defaultImage} alt={`pic-${name}`} />
           </div>
           <div className={style.infoDetail}>
             <div className={style.nameDetail}>
@@ -61,7 +63,7 @@ export default function Detail(props) {
             </div>
             <div className={style.releasedDetail}>
               <h4>
-                <span>Released:</span> {released}
+                <span>Released:</span> {released ? released : `No Info`}
               </h4>
             </div>
             <div className={style.platformsDetail}>
@@ -72,7 +74,10 @@ export default function Detail(props) {
           </div>
         </div>
       ) : (
-        <h2>Loading...</h2>
+        <div className={style.loadingDetail}>
+          <img src={marioGif} alt="loading" />
+          <p>Loading...</p>
+        </div>
       )}
     </div>
   );
