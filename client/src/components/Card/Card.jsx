@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./Card.module.css";
+import defaultImage from "../../assets/images/default-image.jpg";
 const stars = ["⭐", "⭐", "⭐", "⭐", "⭐"];
 
 export const Card = ({ name, image, rating, genres }) => {
@@ -9,14 +10,7 @@ export const Card = ({ name, image, rating, genres }) => {
         <h1>{name}</h1>
       </div>
       <div className={style.cardImage}>
-        <img
-          src={
-            image
-              ? image
-              : `https://d3ugyf2ht6aenh.cloudfront.net/stores/002/027/717/products/cartel-gamer-zone1-d480a40dc78bdf82a916454617516444-640-0.jpg`
-          }
-          alt={name}
-        />
+        <img src={image ? image : defaultImage} alt={name} />
       </div>
       <div className={style.cardRating}>
         <div>
