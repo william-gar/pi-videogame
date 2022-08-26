@@ -54,7 +54,7 @@ function rootReducer(state = initialState, action) {
 
         genreFilter = vGames.filter((el) => el.genres.includes(action.payload));
       }
-      console.log(state.genres);
+      // console.log(state.genres);
       return {
         ...state,
         videogames: [...genreFilter],
@@ -138,6 +138,7 @@ function rootReducer(state = initialState, action) {
       };
 
     case RESET_DETAIL:
+      // console.log(state.videogames);
       return {
         ...state,
         detail: [],
