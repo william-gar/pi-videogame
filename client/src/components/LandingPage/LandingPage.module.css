@@ -2,9 +2,9 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  color: rgb(222, 235, 241);
   font-family: monospace;
   font-size: 25px;
-  color: rgb(222, 235, 241);
   text-shadow: -4px -2px #222;
   gap: 0px;
   background-position: center;
@@ -15,14 +15,24 @@
       hsla(207, 38%, 40%, 0.747),
       hsla(202, 34%, 25%, 0.767)
     ),
-    url("https://c.tenor.com/mhEOwpHpI94AAAAC/gaming-gamer.gif");
+    url("../../assets/images/landing-background.gif");
 
   justify-content: center;
 }
 
-.container h1 {
-  font-family: monospace;
-  font-weight: normal;
+.title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-style: italic;
+  text-shadow: 5px 5px 5px rgb(167, 87, 87);
+}
+
+.container h2 {
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  font-weight: bold;
+  font-size: 40px;
   text-shadow: 5px 5px 5px #000;
 }
 
@@ -31,12 +41,12 @@
   font-size: 20px;
   border-radius: 10px;
   border: 1px solid #999;
-  background-color: #22222225;
+  background-color: #22222290;
   color: #fff;
 }
 
 .buttonHome:hover {
-  background-color: #22222290;
+  background-color: #00000090;
   transition: 0.5s;
   cursor: pointer;
 }
