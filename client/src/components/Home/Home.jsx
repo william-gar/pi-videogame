@@ -37,9 +37,10 @@ export default function Home() {
   //---------------------------------------
 
   useEffect(() => {
-    dispatch(getVideogames());
-    dispatch(getGenres());
-  }, [dispatch]);
+    // console.log("Hooooola");
+    if (!allVideogames.length) dispatch(getVideogames());
+    if (!allGenres.length) dispatch(getGenres());
+  }, []);
 
   function handleFilterByGenre(e) {
     setCurrentPage(1);
