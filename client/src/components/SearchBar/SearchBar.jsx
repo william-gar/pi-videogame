@@ -16,11 +16,13 @@ export default function SearchBar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getVideogamesByName(nameVideogame));
+    setNameVideogame("");
   };
   return (
     <div className={style.searchBar}>
       <input
         className={style.search}
+        value={nameVideogame}
         type="text"
         placeholder="Search..."
         onChange={(e) => handleInputChange(e)}
