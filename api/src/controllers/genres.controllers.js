@@ -8,7 +8,7 @@ const loadGenres = async (db = false) => {
 
   const genresExist = await Genre.findAll();
 
-  if (!genresExist) {
+  if (!genresExist.length) {
     const api = await axios(`https://api.rawg.io/api/genres?key=${API_KEY}`);
 
     genres = [...api.data.results];
@@ -25,7 +25,7 @@ const loadGenres = async (db = false) => {
     });
   }
 
-  if (db && !genresExist) await Genre.bulkCreate(genres);
+  if (db && !genresExist.length) await Genre.bulkCreate(genres);
 
   return genres;
 };
