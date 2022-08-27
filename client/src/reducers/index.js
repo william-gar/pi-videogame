@@ -8,6 +8,7 @@ import {
   GET_VIDEOGAMES_BY_NAME,
   GET_DETAIL_VIDEOGAME,
   RESET_DETAIL,
+  POST_VIDEOGAME,
 } from "../types";
 
 const initialState = {
@@ -142,6 +143,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         detail: [],
+      };
+
+    case POST_VIDEOGAME:
+      return {
+        ...state,
       };
 
     default:
