@@ -97,6 +97,17 @@ export function resetDetail() {
   };
 }
 
+export function postVideogame(payload) {
+  return async function (dispatch) {
+    const videogameCreate = await axios.post(
+      `http://localhost:3001/videogames`,
+      payload
+    );
+    console.log(videogameCreate);
+    return videogameCreate;
+  };
+}
+
 // export function getVideogames() {
 //   return function (dispatch) {
 //     let results = fetch(`https://localhost:3001/videogames`);
