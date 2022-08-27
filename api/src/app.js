@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const videogamesRouter = require("./routes/videogames.routes.js");
 const genresRouter = require("./routes/genres.routes");
+const platformsRouter = require("./routes/platforms.routes");
 
 require("./db.js");
 
@@ -28,6 +29,7 @@ server.use((req, res, next) => {
 
 server.use("/", videogamesRouter);
 server.use("/", genresRouter);
+server.use("/", platformsRouter);
 
 // Error catching endware.
 server.use((err, req, res, next) => {
