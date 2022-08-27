@@ -34,7 +34,7 @@
   margin-top: 20px;
   padding: 20px;
   color: #fff;
-  background-color: #222;
+  background-color: #222222;
   justify-content: space-around;
 }
 
@@ -49,6 +49,8 @@
 
 .imageDetail img {
   max-width: 700px;
+  min-width: 500px;
+  border-radius: 5px;
 }
 
 .infoDetail {
@@ -95,10 +97,9 @@
 }
 
 .containerDescriptionDetail {
-  background-color: #111;
+  background-color: #111111;
   border: 1px solid #444;
-  border-radius: 2px;
-
+  border-radius: 5px;
   padding-right: 3px;
   padding-top: 3px;
   padding-bottom: 3px;
@@ -107,7 +108,7 @@
 .descriptionDetail {
   max-height: 250px;
   overflow-y: scroll;
-  background-color: #111;
+  background-color: #111111;
 }
 
 .descriptionDetail::-webkit-scrollbar {
