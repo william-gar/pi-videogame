@@ -45,6 +45,7 @@ export default function Home() {
   function handleFilterByGenre(e) {
     setCurrentPage(1);
     dispatch(filterByGenre(e.target.value));
+    // console.log(allGenres);
   }
 
   function handleFilterByApiOrDb(e) {
