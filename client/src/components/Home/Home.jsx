@@ -37,8 +37,10 @@ export default function Home() {
   //---------------------------------------
 
   useEffect(() => {
-    // console.log("Hooooola");
     if (!allVideogames.length) dispatch(getVideogames());
+  }, []);
+
+  useEffect(() => {
     if (!allGenres.length) dispatch(getGenres());
   }, []);
 
@@ -128,6 +130,11 @@ export default function Home() {
           </div>
           <div>
             <SearchBar />
+          </div>
+          <div>
+            <Link to="/create-videogame">
+              <button>Create Videogame</button>
+            </Link>
           </div>
           <div className={style.cards}>
             {currentVideogames?.map((el) => {
