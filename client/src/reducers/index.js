@@ -9,12 +9,14 @@ import {
   GET_DETAIL_VIDEOGAME,
   RESET_DETAIL,
   POST_VIDEOGAME,
+  GET_PLATFORMS,
 } from "../types";
 
 const initialState = {
   videogames: [],
   allVideogames: [],
   genres: [],
+  platforms: [],
   detail: [],
 };
 
@@ -148,6 +150,12 @@ function rootReducer(state = initialState, action) {
     case POST_VIDEOGAME:
       return {
         ...state,
+      };
+
+    case GET_PLATFORMS:
+      return {
+        ...state,
+        platforms: action.payload,
       };
 
     default:
