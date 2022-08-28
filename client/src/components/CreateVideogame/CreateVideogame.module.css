@@ -1,0 +1,10 @@
+.containerCreateVideogame {
+  background-image: linear-gradient(
+      to left,
+      hsla(207, 43%, 18%, 0.8),
+      hsla(201, 25%, 23%, 0.8)
+    ),
+    url("../../assets/images/background-home.jpg");
+  height: 100vh;
+  color: #fff;
+}
