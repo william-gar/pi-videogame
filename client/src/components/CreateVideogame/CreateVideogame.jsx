@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import {
-  postVideogame,
-  filterByGenre,
-  getGenres,
-  getPlatforms,
-} from "../../actions/index";
+import { postVideogame, getGenres, getPlatforms } from "../../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./CreateVideogame.module.css";
 
@@ -27,22 +22,23 @@ export default function CreateVideogame() {
     { name: "text" },
     { image: "text" },
     { description: "textarea" },
+    { rating: "text" },
     { released: "date" },
-    { rating: "number" },
   ];
 
   // const selects = [{ genres }, { platforms }];
   // console.log(selects);
-
-  const [input, setInput] = useState({
+  const initialInputs = {
     name: "",
     image: "",
     description: "",
     released: "",
-    rating: 0,
+    rating: "",
     genres: [],
     platforms: [],
-  });
+  };
+
+  const [input, setInput] = useState({ ...initialInputs });
 
   useEffect(() => {
     dispatch(getGenres());
@@ -52,43 +48,99 @@ export default function CreateVideogame() {
     dispatch(getPlatforms());
   }, []);
 
+  const [inputsErrors, setInputsErrors] = useState({});
+
+  const inputsValidator = (form) => {
+    let errors = {};
+    let regexName = /^[A-Za-z\s]+$/;
+    let regexDate = /^\d{4}-\d{2}-\d{2}$/;
+    let regexImage = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpe?g|gif|png|webp|bmp)/i;
+
+    if (
+      !regexName.test(form.name.trim()) ||
+      !form.name.trim() ||
+      form.name.length > 15 ||
+      form.name.length < 4
+    )
+      errors.name = "Name is required (min 4 char & max 15 char)";
+
+    if (!regexImage.test(form.image)) {
+      errors.image = "Image URL is required (enter a valid image url)";
+    }
+
+    if (form.description.length < 10 || form.description.length > 200)
+      errors.description = "Description is required (min 4 char & max 15 char)";
+
+    if (!regexDate.test(form.released))
+      errors.released = "Release date is required - format(yyyy-mm-dd)";
+
+    if (
+      isNaN(form.rating) ||
+      form.rating < 0 ||
+      form.rating > 5 ||
+      form.rating === ""
+    )
+      errors.rating = "Rating is required number(min 0 & max 5)";
+
+    return errors;
+  };
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputsErrors(
+      inputsValidator({
+        ...input,
+        [name]: value,
+      })
+    );
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [e.target.name]: isNaN(e.target.value * 1)
+        ? e.target.value
+        : Number.parseFloat(e.target.value).toFixed(2),
     });
+    console.log(typeof input.rating);
   };
 
   const handleSelect = (e) => {
     setInput({
       ...input,
       [e.target.name]: isNaN(e.target.value * 1)
-        ? [...input[`${e.target.name}`], e.target.value]
-        : [...input[`${e.target.name}`], e.target.value * 1],
+        ? [...new Set([...input[`${e.target.name}`], e.target.value])]
+        : Array.from(
+            new Set([...input[`${e.target.name}`], e.target.value * 1])
+          ),
     });
   };
 
+  const validator =
+    input.name &&
+    input.image &&
+    input.description &&
+    input.rating &&
+    input.released &&
+    input.genres.length &&
+    input.platforms.length
+      ? true
+      : false;
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
-    dispatch(postVideogame(input));
-    alert("VideoGame Created");
-    setInput({
-      name: "",
-      image: "",
-      description: "",
-      released: "",
-      rating: 0,
-      genres: [],
-      platforms: [],
-    });
-    history.push("/home");
+    // console.log(input);
+    if (Object.keys(inputsErrors).length === 0 && validator) {
+      dispatch(postVideogame(input));
+      alert("VideoGame Created");
+      setInput({ ...initialInputs });
+      history.push("/home");
+    } else {
+      alert("Complete All Inputs!!!");
+    }
   };
 
   return (
     <div className={style.containerCreateVideogame}>
       <Link to="/home">
-        <button>&#8592; Go Back</button>
+        <button>&#8592; Go Home</button>
       </Link>
       <h1>Create VideoGame</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -105,6 +157,9 @@ export default function CreateVideogame() {
                 placeholder={`${Object.keys(e).join()}`}
                 onChange={(e) => handleChange(e)}
               ></input>
+              {inputsErrors[`${Object.keys(e).join()}`] && (
+                <p>{inputsErrors[`${Object.keys(e).join()}`]}</p>
+              )}
             </div>
           ) : (
             <div>
@@ -118,6 +173,9 @@ export default function CreateVideogame() {
                 placeholder={`${Object.keys(e).join()}`}
                 onChange={(e) => handleChange(e)}
               ></textarea>
+              {inputsErrors[`${Object.keys(e).join()}`] && (
+                <p>{inputsErrors[`${Object.keys(e).join()}`]}</p>
+              )}
             </div>
           );
         })}
@@ -168,7 +226,14 @@ export default function CreateVideogame() {
             </ul>
           </div>
         </div>
-        <button type="submit">Create VideoGame</button>
+        <button
+          type="submit"
+          disabled={
+            Object.keys(inputsErrors).length || !validator ? true : false
+          }
+        >
+          Create VideoGame
+        </button>
       </form>
     </div>
   );
