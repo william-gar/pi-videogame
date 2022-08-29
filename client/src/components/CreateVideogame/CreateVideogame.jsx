@@ -82,6 +82,12 @@ export default function CreateVideogame() {
     )
       errors.rating = "Rating is required number(min 0 & max 5)";
 
+    if (form.genres.length > 5 || form.genres.length === 0)
+      errors.genres = "Select Genre (min 1 & max 5)";
+
+    if (form.platforms.length > 5 || form.platforms.length === 0)
+      errors.platforms = "Select Platform (min 1 & max 5)";
+
     return errors;
   };
 
@@ -93,23 +99,45 @@ export default function CreateVideogame() {
         [name]: value,
       })
     );
+
     setInput({
       ...input,
-      [e.target.name]: isNaN(e.target.value * 1)
-        ? e.target.value
-        : Number.parseFloat(e.target.value).toFixed(2),
+      [name]: isNaN(value * 1) ? value : Number.parseFloat(value).toFixed(2),
     });
-    console.log(typeof input.rating);
+    // console.log(typeof input.rating);
   };
 
   const handleSelect = (e) => {
+    setInputsErrors(
+      inputsValidator({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
+
+    if (input[`${e.target.name}`].length === 5) {
+      setInput({
+        ...input,
+      });
+    } else {
+      setInput({
+        ...input,
+        [e.target.name]: isNaN(e.target.value * 1)
+          ? [...new Set([...input[`${e.target.name}`], e.target.value])]
+          : Array.from(
+              new Set([...input[`${e.target.name}`], e.target.value * 1])
+            ),
+      });
+    }
+  };
+
+  const handleDelete = (e, k) => {
     setInput({
       ...input,
-      [e.target.name]: isNaN(e.target.value * 1)
-        ? [...new Set([...input[`${e.target.name}`], e.target.value])]
-        : Array.from(
-            new Set([...input[`${e.target.name}`], e.target.value * 1])
-          ),
+      [k]:
+        k === "genres"
+          ? input[k].filter((gen) => genresNames[gen] !== e)
+          : input[k].filter((plat) => plat !== e),
     });
   };
 
@@ -134,6 +162,12 @@ export default function CreateVideogame() {
       history.push("/home");
     } else {
       alert("Complete All Inputs!!!");
+
+      setInputsErrors(
+        inputsValidator({
+          ...input,
+        })
+      );
     }
   };
 
@@ -184,6 +218,7 @@ export default function CreateVideogame() {
             defaultValue="default"
             name="genres"
             onChange={(e) => handleSelect(e)}
+            disabled={input.genres.length === 5}
           >
             <option value="default" disabled>
               Genres
@@ -192,13 +227,21 @@ export default function CreateVideogame() {
               <option value={e.id}>{e.name}</option>
             ))}
           </select>
+          {inputsErrors.genres && <p>{inputsErrors.genres}</p>}
+          {/* <p>{() => errorMessage("genre")}</p> */}
           <div>
             <ul>
               {input.genres.map((e) => {
                 return (
                   <li>
                     {genresNames[e]}
-                    <button>X</button>
+                    <button
+                      type="button"
+                      className="buttonDelete"
+                      onClick={() => handleDelete(genresNames[e], "genres")}
+                    >
+                      X
+                    </button>
                   </li>
                 );
               })}
@@ -210,6 +253,7 @@ export default function CreateVideogame() {
             defaultValue="default"
             name="platforms"
             onChange={(e) => handleSelect(e)}
+            disabled={input.platforms.length === 5}
           >
             <option value="default" disabled>
               Platforms
@@ -218,19 +262,27 @@ export default function CreateVideogame() {
               <option value={e.name}>{e.name}</option>
             ))}
           </select>
+          {inputsErrors.platforms && <p>{inputsErrors.platforms}</p>}
           <div>
             <ul>
               {input.platforms.map((el) => (
-                <li>{el}</li>
+                <li>
+                  {el}
+                  <button
+                    type="button"
+                    className="buttonDelete"
+                    onClick={() => handleDelete(el, "platforms")}
+                  >
+                    X
+                  </button>
+                </li>
               ))}
             </ul>
           </div>
         </div>
         <button
           type="submit"
-          disabled={
-            Object.keys(inputsErrors).length || !validator ? true : false
-          }
+          disabled={Object.keys(inputsErrors).length && !validator}
         >
           Create VideoGame
         </button>
