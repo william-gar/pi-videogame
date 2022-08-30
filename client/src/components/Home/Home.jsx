@@ -82,59 +82,66 @@ export default function Home() {
         </div>
       ) : (
         <div>
-          <div>
-            <select
-              defaultValue="default"
-              onChange={(e) => handleFilterByGenre(e)}
-            >
-              <option value="All Genres">All Genres</option>
-              {allGenres?.map((el) => {
-                return <option value={el.name}>{el.name}</option>;
-              })}
-            </select>
-          </div>
-          <div>
-            <select
-              defaultValue="default"
-              onChange={(e) => handleFilterByApiOrDb(e)}
-            >
-              <option value="all">ALL</option>
-              <option value="api">API</option>
-              <option value="database">DataBase</option>
-            </select>
-          </div>
-          <div>
-            <select
-              defaultValue="default"
-              onChange={(e) => handleAlphabeticalSort(e)}
-            >
-              <option disabled value="default">
-                Alphabetical Sort
-              </option>
-              <option value="a-z">A - Z</option>
-              <option value="z-a">Z - A</option>
-            </select>
-          </div>
-          <div>
-            <select
-              name="select"
-              defaultValue="default"
-              onChange={(e) => handleSortByRating(e)}
-            >
-              <option disabled value="default">
-                Rating
-              </option>
-              <option value="low">Low to High</option>
-              <option value="high">High to Low</option>
-            </select>
-          </div>
-          <div>
-            <SearchBar />
-          </div>
-          <div>
-            <Link to="/create-videogame">
-              <button>Create Videogame</button>
-            </Link>
+          <div className={style.navBar}>
+            <div className={style.titleHome}>
+              <h1>VideoGames</h1>
+            </div>
+            <div className={style.containerAllMenu}>
+              <div className={style.containerFilter}>
+                <select
+                  defaultValue="default"
+                  onChange={(e) => handleFilterByGenre(e)}
+                >
+                  <option value="All Genres">All Genres</option>
+                  {allGenres?.map((el) => {
+                    return <option value={el.name}>{el.name}</option>;
+                  })}
+                </select>
+              </div>
+              <div className={style.containerFilter}>
+                <select
+                  defaultValue="default"
+                  onChange={(e) => handleFilterByApiOrDb(e)}
+                >
+                  <option value="all">ALL</option>
+                  <option value="api">API</option>
+                  <option value="database">DataBase</option>
+                </select>
+              </div>
+              <div className={style.containerFilter}>
+                <select
+                  defaultValue="default"
+                  onChange={(e) => handleAlphabeticalSort(e)}
+                >
+                  <option disabled value="default">
+                    Alphabetical Sort
+                  </option>
+                  <option value="a-z">A - Z</option>
+                  <option value="z-a">Z - A</option>
+                </select>
+              </div>
+              <div className={style.containerFilter}>
+                <select
+                  name="select"
+                  defaultValue="default"
+                  onChange={(e) => handleSortByRating(e)}
+                >
+                  <option disabled value="default">
+                    Rating
+                  </option>
+                  <option value="low">Low to High</option>
+                  <option value="high">High to Low</option>
+                </select>
+              </div>
+              <div>
+                <SearchBar />
+              </div>
+              <div className={style.containerButtonCreate}>
+                <Link to="/create-videogame">
+                  <button>Create</button>
+                </Link>
+              </div>
+            </div>
           </div>
           <div className={style.cards}>
             {currentVideogames?.map((el) => {
