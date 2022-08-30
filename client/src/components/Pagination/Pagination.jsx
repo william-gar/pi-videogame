@@ -13,8 +13,6 @@ export default function Pagination({
     pageNumbers.push(i);
   }
 
-  console.log(currentPage);
-
   return (
     <div>
       {pageNumbers.length === 0 ? null : (
