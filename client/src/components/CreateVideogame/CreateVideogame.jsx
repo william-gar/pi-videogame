@@ -68,8 +68,9 @@ export default function CreateVideogame() {
       errors.image = "Image URL is required (enter a valid image url)";
     }
 
-    if (form.description.length < 10 || form.description.length > 200)
-      errors.description = "Description is required (min 4 char & max 15 char)";
+    if (form.description.length < 10 || form.description.length > 250)
+      errors.description =
+        "Description is required (min 10 char & max 250 char)";
 
     if (!regexDate.test(form.released))
       errors.released = "Release date is required - format(yyyy-mm-dd)";
@@ -174,17 +175,21 @@ export default function CreateVideogame() {
   return (
     <div className={style.containerCreateVideogame}>
       <Link to="/home">
-        <button>&#8592; Go Home</button>
+        <button className={style.goBackHome}>&#8592; Go Home</button>
       </Link>
-      <h1>Create VideoGame</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <h1 className={style.title}>Create VideoGame</h1>
+      <form
+        onSubmit={(e) => handleSubmit(e)}
+        className={style.formCreateVideogame}
+      >
         {inputs.map((e) => {
           return Object.values(e).join() !== "textarea" ? (
-            <div>
+            <div className={style.containerInputs}>
               <div>
-                <label>{Object.keys(e).join()}:</label>
+                <label className={style.labels}>{Object.keys(e).join()}:</label>
               </div>
               <input
+                className={style.inputs}
                 type={`${Object.values(e).join()}`}
                 value={input[`"${Object.keys(e).join()}"`]}
                 name={Object.keys(e).join()}
@@ -192,15 +197,18 @@ export default function CreateVideogame() {
                 onChange={(e) => handleChange(e)}
               ></input>
               {inputsErrors[`${Object.keys(e).join()}`] && (
-                <p>{inputsErrors[`${Object.keys(e).join()}`]}</p>
+                <p className={style.errorsMessages}>
+                  {inputsErrors[`${Object.keys(e).join()}`]}
+                </p>
               )}
             </div>
           ) : (
-            <div>
+            <div className={style.containerInputs}>
               <div>
-                <label>{Object.keys(e).join()}:</label>
+                <label className={style.labels}>{Object.keys(e).join()}:</label>
               </div>
               <textarea
+                className={style.textarea}
                 type="text"
                 value={input[`"${Object.keys(e).join()}"`]}
                 name={Object.keys(e).join()}
@@ -208,17 +216,20 @@ export default function CreateVideogame() {
                 onChange={(e) => handleChange(e)}
               ></textarea>
               {inputsErrors[`${Object.keys(e).join()}`] && (
-                <p>{inputsErrors[`${Object.keys(e).join()}`]}</p>
+                <p className={style.errorsMessages}>
+                  {inputsErrors[`${Object.keys(e).join()}`]}
+                </p>
               )}
             </div>
           );
         })}
-        <div>
+        <div className={style.containerSelects}>
           <select
             defaultValue="default"
             name="genres"
             onChange={(e) => handleSelect(e)}
             disabled={input.genres.length === 5}
+            className={style.selects}
           >
             <option value="default" disabled>
               Genres
@@ -227,13 +238,15 @@ export default function CreateVideogame() {
               <option value={e.id}>{e.name}</option>
             ))}
           </select>
-          {inputsErrors.genres && <p>{inputsErrors.genres}</p>}
+          {inputsErrors.genres && (
+            <p className={style.errorsMessages}>{inputsErrors.genres}</p>
+          )}
           {/* <p>{() => errorMessage("genre")}</p> */}
           <div>
-            <ul>
+            <ul className={style.containerLiSelects}>
               {input.genres.map((e) => {
                 return (
-                  <li>
+                  <li className={style.liSelects}>
                     {genresNames[e]}
                     <button
                       type="button"
@@ -248,12 +261,13 @@ export default function CreateVideogame() {
             </ul>
           </div>
         </div>
-        <div>
+        <div className={style.containerSelects}>
           <select
             defaultValue="default"
             name="platforms"
             onChange={(e) => handleSelect(e)}
             disabled={input.platforms.length === 5}
+            className={style.selects}
           >
             <option value="default" disabled>
               Platforms
@@ -262,11 +276,13 @@ export default function CreateVideogame() {
               <option value={e.name}>{e.name}</option>
             ))}
           </select>
-          {inputsErrors.platforms && <p>{inputsErrors.platforms}</p>}
+          {inputsErrors.platforms && (
+            <p className={style.errorsMessages}>{inputsErrors.platforms}</p>
+          )}
           <div>
-            <ul>
+            <ul className={style.containerLiSelects}>
               {input.platforms.map((el) => (
-                <li>
+                <li className={style.liSelects}>
                   {el}
                   <button
                     type="button"
@@ -282,7 +298,8 @@ export default function CreateVideogame() {
         </div>
         <button
           type="submit"
-          disabled={Object.keys(inputsErrors).length && !validator}
+          disabled={Object.keys(inputsErrors).length ? true : false}
+          className={style.buttonSubmit}
         >
           Create VideoGame
         </button>
