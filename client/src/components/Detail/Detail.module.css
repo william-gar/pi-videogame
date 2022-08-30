@@ -5,7 +5,8 @@
       hsla(201, 25%, 23%, 0.8)
     ),
     url("../../assets/images/background-home.jpg");
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
 }
 
 .goBackDetail {
