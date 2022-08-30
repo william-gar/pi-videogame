@@ -66,6 +66,11 @@ export default function Home() {
     dispatch(sortByRating(e.target.value));
   }
 
+  const handleRefresh = (e) => {
+    e.preventDefault();
+    dispatch(getVideogames());
+  };
+
   return (
     <div className={style.containerAllHome}>
       <Pagination
@@ -85,6 +90,13 @@ export default function Home() {
           <div className={style.navBar}>
             <div className={style.titleHome}>
               <h1>VideoGames</h1>
+              <button
+                type="button"
+                onClick={(e) => handleRefresh(e)}
+                className={style.buttonRefresh}
+              >
+                Refresh &#8635;
+              </button>
             </div>
             <div className={style.containerAllMenu}>
               <div className={style.containerFilter}>
