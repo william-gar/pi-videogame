@@ -5,12 +5,15 @@ export default function Pagination({
   videogamesPerPage,
   allVideogames,
   paginado,
+  currentPage,
 }) {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(allVideogames / videogamesPerPage); i++) {
     pageNumbers.push(i);
   }
+
+  console.log(currentPage);
 
   return (
     <div>
@@ -22,7 +25,10 @@ export default function Pagination({
             ) : null}
             {pageNumbers &&
               pageNumbers.map((number) => (
-                <li key={number}>
+                <li
+                  key={number}
+                  className={currentPage === number ? style.active : ""}
+                >
                   <a onClick={() => paginado(number)} href>
                     {number}
                   </a>

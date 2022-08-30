@@ -27,3 +27,8 @@
   color: #ffff00;
   transition: 0.3s;
 }
+
+.pagination ul .active {
+  background-color: #222222;
+  color: #ffff00;
+}
