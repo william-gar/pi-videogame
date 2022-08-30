@@ -146,7 +146,7 @@
 }
 
 .loadingDetail {
-  height: 70%;
+  height: 75vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
