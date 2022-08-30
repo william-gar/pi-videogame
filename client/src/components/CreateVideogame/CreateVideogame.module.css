@@ -1,4 +1,8 @@
 .containerCreateVideogame {
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+
   background-image: linear-gradient(
       to left,
       hsla(207, 43%, 18%, 0.8),
@@ -9,4 +13,229 @@
   height: 100%;
   color: #fff;
   padding-bottom: 100px;
+}
+
+.goBackHome {
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  border: 1px solid #555;
+  color: #fff;
+  background-color: #222;
+  font-family: monospace;
+  font-size: 20px;
+}
+
+.goBackHome:hover {
+  background-color: #111;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.title {
+  font-family: monospace;
+  font-style: italic;
+  text-shadow: 5px 5px 5px rgb(167, 87, 87);
+  margin-bottom: 30px;
+}
+
+.formCreateVideogame {
+  padding-top: 50px;
+  padding-bottom: 100px;
+  border: 1px solid #555;
+  border-radius: 10px;
+  width: 500px;
+  margin: auto;
+  background-color: #222222;
+  box-shadow: -8px -8px 10px #111;
+}
+
+.containerInputs {
+  /* border: 1px solid #fff; */
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.labels {
+  text-transform: capitalize;
+  /* border: 1px solid #ff0; */
+  width: 100%;
+  font-size: 19px;
+  color: #ccc;
+  padding-left: 3px;
+}
+
+.inputs {
+  width: 95%;
+  height: 30px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #111;
+  color: #fff;
+  font-size: 17px;
+}
+
+.inputs:focus {
+  outline: 0.5px solid rgb(182, 176, 90);
+}
+
+.inputs::placeholder {
+  text-transform: capitalize;
+  font-style: italic;
+  padding-left: 5px;
+  color: #444;
+}
+
+.textarea {
+  min-width: 95%;
+  max-width: 95%;
+  min-height: 100px;
+  max-height: 150px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #111;
+  color: #fff;
+  font-size: 17px;
+  resize: none;
+}
+
+.textarea:focus {
+  outline: 0.5px solid rgb(182, 176, 90);
+}
+
+.textarea::placeholder {
+  text-transform: capitalize;
+  font-style: italic;
+  padding-left: 5px;
+  color: #444;
+}
+
+.textarea::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.textarea::-webkit-scrollbar:vertical {
+  width: 9px;
+}
+
+.textarea::-webkit-scrollbar-thumb {
+  background-color: #313d47;
+  border-radius: 5px;
+  border: 1px solid #46701e;
+}
+
+.inputs[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  padding-right: 5px;
+}
+
+.inputs[type="date"]::-webkit-calendar-picker-indicator:hover {
+  cursor: pointer;
+}
+
+.containerSelects {
+  /* border: 1px solid #fff; */
+  width: 80%;
+  margin: auto;
+  text-align: start;
+  margin-bottom: 10px;
+}
+
+.selects {
+  height: 30px;
+  width: 50%;
+  background-color: #111;
+  color: #fff;
+  font-size: 17px;
+  border-radius: 3px;
+}
+
+.selects::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.selects::-webkit-scrollbar:vertical {
+  width: 1px;
+}
+
+.selects::-webkit-scrollbar:horizontal {
+  width: 1px;
+}
+
+.selects::-webkit-scrollbar-thumb {
+  background-color: #313d47;
+  border-radius: 5px;
+  border: 1px solid #46701e;
+}
+
+.selects:hover {
+  cursor: pointer;
+  background-color: #333;
+  transition: 0.5s;
+}
+
+.containerLiSelects {
+  border: 1px solid #555;
+  border-radius: 5px;
+  list-style: none;
+  margin: 0;
+  margin-top: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.liSelects {
+  border: 1px solid #555;
+  background-color: #444;
+  border-radius: 5px;
+  width: max-content;
+  padding: 5px;
+  padding-right: 3px;
+  display: flex;
+}
+
+.liSelects button {
+  margin-left: 10px;
+  border: none;
+  border-radius: 2px;
+  background-color: #f00;
+  color: #fff;
+}
+
+.liSelects button:hover {
+  cursor: pointer;
+  background-color: rgb(117, 18, 18);
+  transition: 0.5s;
+}
+
+.errorsMessages {
+  /* border: 1px solid #ff0; */
+  margin: 0;
+  padding-left: 3px;
+  font-size: 15px;
+  color: rgb(189, 59, 59);
+}
+
+.buttonSubmit {
+  height: 35px;
+  font-size: 18px;
+  border: 1px solid #777;
+  border-radius: 5px;
+  background-color: rgb(117, 45, 45);
+  color: #fff;
+  margin-top: 40px;
+}
+
+.buttonSubmit:hover {
+  cursor: pointer;
+  background-color: rgb(80, 12, 12);
+  border-color: #555;
+  transition: 0.3s;
 }
