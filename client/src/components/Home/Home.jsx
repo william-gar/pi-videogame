@@ -30,9 +30,15 @@ export default function Home() {
     indexOfFirstVideogame,
     indexOfLastVideogame
   );
+  const lastPage = Math.ceil(allVideogames.length / videogamesPerPage);
 
   const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    if (pageNumber === "prev" && currentPage > 1)
+      setCurrentPage(currentPage - 1);
+    if (pageNumber === "next" && currentPage < lastPage)
+      setCurrentPage(currentPage + 1);
+
+    if (typeof pageNumber === "number") setCurrentPage(pageNumber);
   };
   //---------------------------------------
 

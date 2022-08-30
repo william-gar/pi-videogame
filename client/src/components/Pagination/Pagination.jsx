@@ -17,6 +17,9 @@ export default function Pagination({
       {pageNumbers.length === 0 ? null : (
         <nav className={style.pagination}>
           <ul>
+            {pageNumbers.length > 1 ? (
+              <li onClick={() => paginado("prev")}>&#9650;</li>
+            ) : null}
             {pageNumbers &&
               pageNumbers.map((number) => (
                 <li key={number}>
@@ -25,6 +28,9 @@ export default function Pagination({
                   </a>
                 </li>
               ))}
+            {pageNumbers.length > 1 ? (
+              <li onClick={() => paginado("next")}>&#9660;</li>
+            ) : null}
           </ul>
         </nav>
       )}
