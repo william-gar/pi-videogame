@@ -1,26 +1,26 @@
 .searchBar {
   border: 1px solid #555;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   padding: 5px;
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: #777;
+  background-color: #333;
   width: max-content;
   margin: auto;
 }
 
 .search {
   height: 25px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border: 1px solid #999;
+  border-radius: 5px;
   background-color: #ffffff20;
   color: #fff;
   font-size: 17px;
-  padding-left: 20px;
+  padding-left: 5px;
 }
 
 .search:focus {
