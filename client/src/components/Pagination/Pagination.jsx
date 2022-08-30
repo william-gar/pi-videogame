@@ -6,6 +6,7 @@ export default function Pagination({
   allVideogames,
   paginado,
   currentPage,
+  lastPage,
 }) {
   const pageNumbers = [];
 
@@ -19,7 +20,12 @@ export default function Pagination({
         <nav className={style.pagination}>
           <ul>
             {pageNumbers.length > 1 ? (
-              <li onClick={() => paginado("prev")}>&#9650;</li>
+              <li
+                onClick={() => paginado("prev")}
+                className={currentPage === 1 ? style.disconnect : ""}
+              >
+                &#9650;
+              </li>
             ) : null}
             {pageNumbers &&
               pageNumbers.map((number) => (
@@ -33,7 +39,12 @@ export default function Pagination({
                 </li>
               ))}
             {pageNumbers.length > 1 ? (
-              <li onClick={() => paginado("next")}>&#9660;</li>
+              <li
+                onClick={() => paginado("next")}
+                className={currentPage === lastPage ? style.disconnect : ""}
+              >
+                &#9660;
+              </li>
             ) : null}
           </ul>
         </nav>

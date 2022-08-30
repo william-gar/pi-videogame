@@ -84,6 +84,7 @@ export default function Home() {
         allVideogames={allVideogames.length}
         paginado={paginado}
         currentPage={currentPage}
+        lastPage={lastPage}
       />
       {allVideogames.length === 0 ? (
         <div className={style.loading}>

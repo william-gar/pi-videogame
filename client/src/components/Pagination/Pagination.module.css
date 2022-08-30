@@ -32,3 +32,7 @@
   background-color: #222222;
   color: #ffff00;
 }
+
+.disconnect {
+  pointer-events: none;
+}
