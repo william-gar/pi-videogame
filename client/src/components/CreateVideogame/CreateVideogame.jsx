@@ -62,18 +62,18 @@ export default function CreateVideogame() {
       form.name.length > 15 ||
       form.name.length < 4
     )
-      errors.name = "Name is required (min 4 char & max 15 char)";
+      errors.name = "*Name is required (min 4 char & max 15 char)";
 
     if (!regexImage.test(form.image)) {
-      errors.image = "Image URL is required (enter a valid image url)";
+      errors.image = "*Image URL is required (enter a valid image url)";
     }
 
     if (form.description.length < 10 || form.description.length > 250)
       errors.description =
-        "Description is required (min 10 char & max 250 char)";
+        "*Description is required (min 10 char & max 250 char)";
 
     if (!regexDate.test(form.released))
-      errors.released = "Release date is required - format(yyyy-mm-dd)";
+      errors.released = "*Release date is required - format(yyyy-mm-dd)";
 
     if (
       isNaN(form.rating) ||
@@ -81,13 +81,13 @@ export default function CreateVideogame() {
       form.rating > 5 ||
       form.rating === ""
     )
-      errors.rating = "Rating is required number(min 0 & max 5)";
+      errors.rating = "*Rating is required number(min 0 & max 5)";
 
     if (form.genres.length > 5 || form.genres.length === 0)
-      errors.genres = "Select Genre (min 1 & max 5)";
+      errors.genres = "*Select Genre (min 1 & max 5)";
 
     if (form.platforms.length > 5 || form.platforms.length === 0)
-      errors.platforms = "Select Platform (min 1 & max 5)";
+      errors.platforms = "*Select Platform (min 1 & max 5)";
 
     return errors;
   };
@@ -316,7 +316,9 @@ export default function CreateVideogame() {
         </div>
         <button
           type="submit"
-          disabled={!validator ? true : false}
+          disabled={
+            Object.keys(inputsErrors).length || !validator ? true : false
+          }
           className={style.buttonSubmit}
         >
           Create VideoGame
