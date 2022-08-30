@@ -1,13 +1,6 @@
 .containerAllHome {
   min-height: 100vh;
   height: 100%;
-  /* display: flex;
-  flex-direction: column;
-  font-family: monospace;
-  font-size: 25px;
-  color: rgb(222, 235, 241);
-  text-shadow: -4px -2px #222;
-  gap: 0px; */
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
@@ -19,6 +12,72 @@
     url("../../assets/images/background-home.jpg");
 
   justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navBar {
+  background-color: #222;
+  padding-bottom: 20px;
+  position: fixed;
+  width: 100%;
+  box-shadow: 3px 3px 15px #555;
+}
+
+.titleHome {
+  /* border: 1px solid #fff; */
+  height: max-content;
+}
+
+.titleHome h1 {
+  /* border: 1px solid #ff0; */
+  font-family: monospace;
+  font-style: italic;
+  text-shadow: 5px 5px 5px rgb(167, 87, 87);
+  color: #fff;
+  font-size: 35px;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.containerAllMenu {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* .containerFilter {
+  border: 1px solid #fff;
+} */
+
+.containerFilter select {
+  height: 30px;
+  /* width: 130px; */
+  font-size: 17px;
+  background-color: #444;
+  color: #ddd;
+  border-radius: 3px;
+}
+
+.containerFilter select:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+
+.containerButtonCreate button {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(136, 18, 18);
+  color: #fff;
+}
+
+.containerButtonCreate button:hover {
+  cursor: pointer;
+  background-color: rgb(175, 46, 46);
+  transition: 0.3s;
 }
 
 .cards {
@@ -27,7 +86,7 @@
   flex-wrap: wrap;
   gap: 30px;
   /* background-color: #ffeeff25; */
-  padding: 50px 0;
+  padding: 170px 0;
   height: max-content;
 }
 
