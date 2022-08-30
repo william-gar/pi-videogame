@@ -109,10 +109,14 @@ export default function CreateVideogame() {
   };
 
   const handleSelect = (e) => {
+    console.log("Name: ", e.target.name);
+    console.log("Value: ", e.target.value);
     setInputsErrors(
       inputsValidator({
         ...input,
-        [e.target.name]: e.target.value,
+        [e.target.name]: isNaN(e.target.value * 1)
+          ? [...input[`${e.target.name}`], e.target.value]
+          : [...input[`${e.target.name}`], e.target.value * 1],
       })
     );
 
@@ -133,6 +137,17 @@ export default function CreateVideogame() {
   };
 
   const handleDelete = (e, k) => {
+    setInputsErrors(
+      inputsValidator({
+        ...input,
+        [k]:
+          k === "genres"
+            ? input[k].filter((gen) => genresNames[gen] !== e)
+            : input[k].filter((plat) => plat !== e),
+      })
+    );
+    console.log("e: ", e);
+    console.log("k: ", k);
     setInput({
       ...input,
       [k]:
@@ -238,10 +253,10 @@ export default function CreateVideogame() {
               <option value={e.id}>{e.name}</option>
             ))}
           </select>
-          {inputsErrors.genres && (
+          {inputsErrors.genres ? (
             <p className={style.errorsMessages}>{inputsErrors.genres}</p>
-          )}
-          {/* <p>{() => errorMessage("genre")}</p> */}
+          ) : null}
+
           <div>
             <ul className={style.containerLiSelects}>
               {input.genres.map((e) => {
@@ -276,9 +291,12 @@ export default function CreateVideogame() {
               <option value={e.name}>{e.name}</option>
             ))}
           </select>
-          {inputsErrors.platforms && (
+          {/* {inputsErrors.platforms && (
             <p className={style.errorsMessages}>{inputsErrors.platforms}</p>
-          )}
+          )} */}
+          {inputsErrors.platforms ? (
+            <p className={style.errorsMessages}>{inputsErrors.platforms}</p>
+          ) : null}
           <div>
             <ul className={style.containerLiSelects}>
               {input.platforms.map((el) => (
@@ -298,7 +316,7 @@ export default function CreateVideogame() {
         </div>
         <button
           type="submit"
-          disabled={Object.keys(inputsErrors).length ? true : false}
+          disabled={!validator ? true : false}
           className={style.buttonSubmit}
         >
           Create VideoGame

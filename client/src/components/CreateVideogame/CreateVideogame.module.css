@@ -239,3 +239,7 @@
   border-color: #555;
   transition: 0.3s;
 }
+
+.buttonSubmit:disabled {
+  background-color: rgb(194, 151, 151);
+}
