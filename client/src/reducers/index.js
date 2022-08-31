@@ -44,20 +44,19 @@ function rootReducer(state = initialState, action) {
 
     case FILTER_BY_GENRE:
       let genreFilter;
-
       if (action.payload === "All Genres") {
         genreFilter = state.allVideogames;
       } else {
         const vGames = state.allVideogames;
-        vGames.forEach((el) => {
-          if (typeof el.genres[0] !== "string") {
-            el.genres = el.genres.map((e) => e.name);
-          }
-        });
+        // vGames.forEach((el) => {
+        //   if (typeof el.genres[0] !== "string") {
+        //     el.genres = el.genres.map((e) => e.name);
+        //   }
+        // });
 
         genreFilter = vGames.filter((el) => el.genres.includes(action.payload));
       }
-      // console.log(state.genres);
+
       return {
         ...state,
         videogames: [...genreFilter],
@@ -118,7 +117,9 @@ function rootReducer(state = initialState, action) {
       };
 
     case GET_DETAIL_VIDEOGAME:
-      let videogameInfo = action.payload;
+      let videogameInfo = { ...action.payload };
+      // console.log(action.payload);
+      // console.log(videogameInfo);
 
       if (videogameInfo.genres.length) {
         videogameInfo.genres =
