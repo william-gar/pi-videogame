@@ -15,6 +15,10 @@ import style from "./Home.module.css";
 import Pagination from "../Pagination/Pagination";
 import SearchBar from "../SearchBar/SearchBar";
 import metalSlug from "../../assets/images/metal-slug.gif";
+import FilterByGenre from "../FilterByGenre/FilterByGenre";
+import FilterApiOrDb from "../FilterApiOrDb/FilterApiOrDb";
+import AlphabeticalSort from "../AlphabeticalSort/AlphabeticalSort";
+import SortByRating from "../SortByRating/SortByRating";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -22,6 +26,7 @@ export default function Home() {
   const allGenres = useSelector((state) => state.genres);
 
   //Paginado ------------------------------
+
   const [currentPage, setCurrentPage] = useState(1);
   const [videogamesPerPage, setVideogamesPerPage] = useState(15);
   const indexOfLastVideogame = currentPage * videogamesPerPage; //15
@@ -50,27 +55,29 @@ export default function Home() {
     if (!allGenres.length) dispatch(getGenres());
   }, []);
 
-  function handleFilterByGenre(e) {
-    setCurrentPage(1);
+  //--FILTER FUNCTIONS----------------------------
+  const handleFilterByGenre = (e, p) => {
+    setCurrentPage(p);
     dispatch(filterByGenre(e.target.value));
-    // console.log(allGenres);
-  }
+  };
 
-  function handleFilterByApiOrDb(e) {
-    setCurrentPage(1);
+  const handleFilterByApiOrDb = (e, p) => {
+    setCurrentPage(p);
     dispatch(filterByApiOrDb(e.target.value));
-  }
+  };
+  //----------------------------------------------
 
-  function handleAlphabeticalSort(e) {
-    setCurrentPage(1);
+  //--SORT FUNCTIONS------------------------------
+  const handleAlphabeticalSort = (e, p) => {
+    setCurrentPage(p);
     dispatch(alphabeticalSort(e.target.value));
-  }
+  };
 
-  function handleSortByRating(e) {
-    // e.preventDefault();
-    setCurrentPage(1);
+  const handleSortByRating = (e, p) => {
+    setCurrentPage(p);
     dispatch(sortByRating(e.target.value));
-  }
+  };
+  //----------------------------------------------
 
   const handleRefresh = (e) => {
     e.preventDefault();
@@ -108,50 +115,18 @@ export default function Home() {
             </div>
             <div className={style.containerAllMenu}>
               <div className={style.containerFilter}>
-                <select
-                  defaultValue="default"
-                  onChange={(e) => handleFilterByGenre(e)}
-                >
-                  <option value="All Genres">All Genres</option>
-                  {allGenres?.map((el) => {
-                    return <option value={el.name}>{el.name}</option>;
-                  })}
-                </select>
+                <FilterByGenre handleFilterByGenre={handleFilterByGenre} />
               </div>
               <div className={style.containerFilter}>
-                <select
-                  defaultValue="default"
-                  onChange={(e) => handleFilterByApiOrDb(e)}
-                >
-                  <option value="all">ALL</option>
-                  <option value="api">API</option>
-                  <option value="database">DataBase</option>
-                </select>
+                <FilterApiOrDb handleFilterByApiOrDb={handleFilterByApiOrDb} />
               </div>
               <div className={style.containerFilter}>
-                <select
-                  defaultValue="default"
-                  onChange={(e) => handleAlphabeticalSort(e)}
-                >
-                  <option disabled value="default">
-                    Alphabetical Sort
-                  </option>
-                  <option value="a-z">A - Z</option>
-                  <option value="z-a">Z - A</option>
-                </select>
+                <AlphabeticalSort
+                  handleAlphabeticalSort={handleAlphabeticalSort}
+                />
               </div>
               <div className={style.containerFilter}>
-                <select
-                  name="select"
-                  defaultValue="default"
-                  onChange={(e) => handleSortByRating(e)}
-                >
-                  <option disabled value="default">
-                    Rating
-                  </option>
-                  <option value="low">Low to High</option>
-                  <option value="high">High to Low</option>
-                </select>
+                <SortByRating handleSortByRating={handleSortByRating} />
               </div>
               <div>
                 <SearchBar />
