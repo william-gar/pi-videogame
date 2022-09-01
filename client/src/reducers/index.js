@@ -26,8 +26,8 @@ function rootReducer(state = initialState, action) {
     case GET_VIDEOGAMES:
       return {
         ...state,
-        videogames: action.payload,
-        allVideogames: action.payload,
+        videogames: [...action.payload],
+        allVideogames: [...action.payload],
       };
 
     case GET_GENRES:
@@ -151,7 +151,7 @@ function rootReducer(state = initialState, action) {
       } else {
         videogameInfo = [...action.payload];
       }
-      console.log(videogameInfo);
+      // console.log(videogameInfo);
       return {
         ...state,
         detail: videogameInfo,
