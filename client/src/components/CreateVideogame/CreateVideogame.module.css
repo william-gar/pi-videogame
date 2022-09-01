@@ -154,6 +154,16 @@
   border-radius: 3px;
 }
 
+.selectEmpty {
+  margin: 0;
+  font-size: 15px;
+  color: #999;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .selects::-webkit-scrollbar {
   -webkit-appearance: none;
 }
@@ -221,6 +231,10 @@
   padding-left: 3px;
   font-size: 13px;
   color: rgb(202, 105, 105);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .buttonSubmit {

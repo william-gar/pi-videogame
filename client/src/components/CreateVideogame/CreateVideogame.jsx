@@ -265,20 +265,24 @@ export default function CreateVideogame() {
 
           <div>
             <ul className={style.containerLiSelects}>
-              {input.genres.map((e) => {
-                return (
-                  <li className={style.liSelects}>
-                    {genresNames[e]}
-                    <button
-                      type="button"
-                      className="buttonDelete"
-                      onClick={() => handleDelete(genresNames[e], "genres")}
-                    >
-                      X
-                    </button>
-                  </li>
-                );
-              })}
+              {input.genres.length ? (
+                input.genres.map((e) => {
+                  return (
+                    <li className={style.liSelects}>
+                      {genresNames[e]}
+                      <button
+                        type="button"
+                        className="buttonDelete"
+                        onClick={() => handleDelete(genresNames[e], "genres")}
+                      >
+                        X
+                      </button>
+                    </li>
+                  );
+                })
+              ) : (
+                <p className={style.selectEmpty}>Select min 1 Genre & max 5</p>
+              )}
             </ul>
           </div>
         </div>
@@ -305,18 +309,24 @@ export default function CreateVideogame() {
           ) : null}
           <div>
             <ul className={style.containerLiSelects}>
-              {input.platforms.map((el) => (
-                <li className={style.liSelects}>
-                  {el}
-                  <button
-                    type="button"
-                    className="buttonDelete"
-                    onClick={() => handleDelete(el, "platforms")}
-                  >
-                    X
-                  </button>
-                </li>
-              ))}
+              {input.platforms.length ? (
+                input.platforms.map((el) => (
+                  <li className={style.liSelects}>
+                    {el}
+                    <button
+                      type="button"
+                      className="buttonDelete"
+                      onClick={() => handleDelete(el, "platforms")}
+                    >
+                      X
+                    </button>
+                  </li>
+                ))
+              ) : (
+                <p className={style.selectEmpty}>
+                  Select min 1 Platform & max 5
+                </p>
+              )}
             </ul>
           </div>
         </div>
