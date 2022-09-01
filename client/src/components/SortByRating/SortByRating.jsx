@@ -11,6 +11,7 @@ export default function SortByRating({ handleSortByRating }) {
         <option disabled value="default">
           Rating
         </option>
+        <option value="default">Default</option>
         <option value="low">Low to High</option>
         <option value="high">High to Low</option>
       </select>
