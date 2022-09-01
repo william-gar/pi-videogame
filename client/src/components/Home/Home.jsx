@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getVideogames } from "../../actions/index";
@@ -18,35 +18,20 @@ export default function Home() {
   const dispatch = useDispatch();
   const allVideogames = useSelector((state) => state.videogames);
 
-  //Paginado ------------------------------
-
+  //Pagination ------------------------------------------------------------------
   const [currentPage, setCurrentPage] = useState(1);
-  const [videogamesPerPage, setVideogamesPerPage] = useState(15);
+  const [videogamesPerPage] = useState(15);
   const indexOfLastVideogame = currentPage * videogamesPerPage; //15
   const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; // 0
   const currentVideogames = allVideogames.slice(
     indexOfFirstVideogame,
     indexOfLastVideogame
   );
-  const lastPage = Math.ceil(allVideogames.length / videogamesPerPage);
-
-  const paginado = (pageNumber) => {
-    if (pageNumber === "prev" && currentPage > 1)
-      setCurrentPage(currentPage - 1);
-    if (pageNumber === "next" && currentPage < lastPage)
-      setCurrentPage(currentPage + 1);
-
-    if (typeof pageNumber === "number") setCurrentPage(pageNumber);
-  };
-  //---------------------------------------
-
-  useEffect(() => {
-    if (!allVideogames.length) dispatch(getVideogames());
-  }, []);
 
   const handleSetCurrentPage = () => {
     setCurrentPage(1);
   };
+  //-----------------------------------------------------------------------------
 
   const handleRefresh = (e) => {
     e.preventDefault();
@@ -57,10 +42,8 @@ export default function Home() {
     <div className={style.containerAllHome}>
       <Pagination
         videogamesPerPage={videogamesPerPage}
-        allVideogames={allVideogames.length}
-        paginado={paginado}
         currentPage={currentPage}
-        lastPage={lastPage}
+        setCurrentPage={setCurrentPage}
       />
       {allVideogames.length === 1 && allVideogames[0] === "Error" ? (
         <ErrorNotFound />

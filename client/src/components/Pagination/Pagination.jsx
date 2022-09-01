@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./Pagination.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getVideogames } from "../../actions";
 
 export default function Pagination({
-  videogamesPerPage,
-  allVideogames,
-  paginado,
   currentPage,
-  lastPage,
+  setCurrentPage,
+  videogamesPerPage,
 }) {
+  //--------------------------------------------------------------------
+  const dispatch = useDispatch();
+  const allVideogames = useSelector((state) => state.videogames);
+
+  useEffect(() => {
+    if (!allVideogames.length) dispatch(getVideogames());
+  }, []);
+
+  const lastPage = Math.ceil(allVideogames.length / videogamesPerPage);
+
+  const paginado = (pageNumber) => {
+    if (pageNumber === "prev" && currentPage > 1)
+      setCurrentPage(currentPage - 1);
+    if (pageNumber === "next" && currentPage < lastPage)
+      setCurrentPage(currentPage + 1);
+
+    if (typeof pageNumber === "number") setCurrentPage(pageNumber);
+  };
+
+  //--------------------------------------------------------------------
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(allVideogames / videogamesPerPage); i++) {
+  for (
+    let i = 1;
+    i <= Math.ceil(allVideogames.length / videogamesPerPage);
+    i++
+  ) {
     pageNumbers.push(i);
   }
 
