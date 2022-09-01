@@ -49,11 +49,11 @@ function rootReducer(state = initialState, action) {
         genreFilter = state.allVideogames;
       } else {
         const vGames = state.allVideogames;
-        // vGames.forEach((el) => {
-        //   if (typeof el.genres[0] !== "string") {
-        //     el.genres = el.genres.map((e) => e.name);
-        //   }
-        // });
+        vGames.forEach((el) => {
+          if (typeof el.genres[0] !== "string") {
+            el.genres = el.genres.map((e) => e.name);
+          }
+        });
 
         genreFilter = vGames.filter((el) => el.genres.includes(action.payload));
       }
