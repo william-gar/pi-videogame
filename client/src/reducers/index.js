@@ -148,6 +148,9 @@ function rootReducer(state = initialState, action) {
         } else {
           videogameInfo.platforms = `No Platforms`;
         }
+
+        if (!videogameInfo.description.length)
+          videogameInfo.description = `No Description...`;
       } else {
         videogameInfo = [...action.payload];
       }
