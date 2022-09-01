@@ -143,6 +143,8 @@ const getAllVideogames = async (req, res) => {
 
     videogames = [...nameDb, ...videogames];
 
+    if (!videogames.length) videogames.push("Error");
+
     return res.send(videogames);
   }
 
@@ -186,7 +188,7 @@ const getVideogameApiById = async (idVideogame) => {
     return objVideogame;
   } catch (error) {
     console.log(`An Error ocurred, ${error}`);
-    return `Videogame with id: ${idVideogame} Not Found.`;
+    return ["Error"];
   }
 };
 
@@ -216,7 +218,7 @@ const getVideogameById = async (req, res) => {
 
 // POST VIDEOGAME -------------------------------------------------------------
 const postVideogame = async (req, res) => {
-  const { name, description, released, rating, platforms, image, genres } =
+  let { name, description, released, rating, platforms, image, genres } =
     req.body;
 
   const validator =
@@ -225,6 +227,10 @@ const postVideogame = async (req, res) => {
       : false;
 
   if (!validator) return res.status(400).send(`Some data is missing!`);
+
+  name = name.trim();
+  description = description.trim();
+  image = image.trim();
 
   try {
     const obj = { name, description, released, rating, platforms, image };
