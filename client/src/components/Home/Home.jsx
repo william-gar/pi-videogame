@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import {
   getVideogames,
   getGenres,
-  filterByGenre,
+  // filterByGenre,
   filterByApiOrDb,
   alphabeticalSort,
   sortByRating,
@@ -56,11 +56,15 @@ export default function Home() {
     if (!allGenres.length) dispatch(getGenres());
   }, []);
 
-  //--FILTER FUNCTIONS----------------------------
-  const handleFilterByGenre = (e, p) => {
-    setCurrentPage(p);
-    dispatch(filterByGenre(e.target.value));
+  const handleSetCurrentPage = () => {
+    setCurrentPage(1);
   };
+
+  //--FILTER FUNCTIONS----------------------------
+  // const handleFilterByGenre = (e, p) => {
+  //   setCurrentPage(p);
+  //   dispatch(filterByGenre(e.target.value));
+  // };
 
   const handleFilterByApiOrDb = (e, p) => {
     setCurrentPage(p);
@@ -118,7 +122,7 @@ export default function Home() {
             </div>
             <div className={style.containerAllMenu}>
               <div className={style.containerFilter}>
-                <FilterByGenre handleFilterByGenre={handleFilterByGenre} />
+                <FilterByGenre handleSetCurrentPage={handleSetCurrentPage} />
               </div>
               <div className={style.containerFilter}>
                 <FilterApiOrDb handleFilterByApiOrDb={handleFilterByApiOrDb} />
