@@ -10,6 +10,7 @@ export default function AlphabeticalSort({ handleAlphabeticalSort }) {
         <option disabled value="default">
           Alphabetical Sort
         </option>
+        <option value="default">Default</option>
         <option value="a-z">A - Z</option>
         <option value="z-a">Z - A</option>
       </select>
