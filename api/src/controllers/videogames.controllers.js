@@ -87,7 +87,7 @@ const getVideogamesDb = async () => {
 // GET VIDEOGAMES BY NAME API----------------------------------------------------
 const getVideogamesApiByName = async (name, quantity) => {
   let videogamesByName = await axios(
-    `https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`
+    `https://api.rawg.io/api/games?search=${name.trim()}&key=${API_KEY}`
   );
 
   videogamesByName = videogamesByName.data.results.slice(0, quantity);
