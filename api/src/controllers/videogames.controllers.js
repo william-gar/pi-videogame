@@ -13,7 +13,6 @@ const getVideogamesApi = async (req, res) => {
 
     videogamesApi = [...api.data.results];
 
-    // Get more than 20 characters. Change value in constant quantity.
     if (quantity > 20) {
       let apiAux = api;
       let residue = quantity % videogamesApi.length;
