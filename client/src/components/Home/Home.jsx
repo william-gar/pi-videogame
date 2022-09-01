@@ -6,7 +6,7 @@ import {
   getVideogames,
   getGenres,
   // filterByGenre,
-  filterByApiOrDb,
+  // filterByApiOrDb,
   alphabeticalSort,
   sortByRating,
 } from "../../actions/index";
@@ -66,10 +66,10 @@ export default function Home() {
   //   dispatch(filterByGenre(e.target.value));
   // };
 
-  const handleFilterByApiOrDb = (e, p) => {
-    setCurrentPage(p);
-    dispatch(filterByApiOrDb(e.target.value));
-  };
+  // const handleFilterByApiOrDb = (e, p) => {
+  //   setCurrentPage(p);
+  //   dispatch(filterByApiOrDb(e.target.value));
+  // };
   //----------------------------------------------
 
   //--SORT FUNCTIONS------------------------------
@@ -125,7 +125,7 @@ export default function Home() {
                 <FilterByGenre handleSetCurrentPage={handleSetCurrentPage} />
               </div>
               <div className={style.containerFilter}>
-                <FilterApiOrDb handleFilterByApiOrDb={handleFilterByApiOrDb} />
+                <FilterApiOrDb handleSetCurrentPage={handleSetCurrentPage} />
               </div>
               <div className={style.containerFilter}>
                 <AlphabeticalSort
