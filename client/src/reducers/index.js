@@ -10,6 +10,7 @@ import {
   RESET_DETAIL,
   POST_VIDEOGAME,
   GET_PLATFORMS,
+  GO_BACK_HOME,
 } from "../types";
 
 const initialState = {
@@ -57,6 +58,8 @@ function rootReducer(state = initialState, action) {
         genreFilter = vGames.filter((el) => el.genres.includes(action.payload));
       }
 
+      if (!genreFilter.length) genreFilter.push("Error");
+
       return {
         ...state,
         videogames: [...genreFilter],
@@ -79,18 +82,23 @@ function rootReducer(state = initialState, action) {
       };
 
     case ALPHABETICAL_SORT:
-      const alphabeticalSort =
-        action.payload === "a-z"
-          ? state.videogames.sort((a, b) => {
-              if (a.name > b.name) return 1;
-              if (b.name > a.name) return -1;
-              return 0;
-            })
-          : state.videogames.sort((a, b) => {
-              if (a.name > b.name) return -1;
-              if (b.name > a.name) return 1;
-              return 0;
-            });
+      let alphabeticalSort;
+      if (action.payload === "default") {
+        alphabeticalSort = [...state.allVideogames];
+      } else {
+        alphabeticalSort =
+          action.payload === "a-z"
+            ? state.videogames.sort((a, b) => {
+                if (a.name > b.name) return 1;
+                if (b.name > a.name) return -1;
+                return 0;
+              })
+            : state.videogames.sort((a, b) => {
+                if (a.name > b.name) return -1;
+                if (b.name > a.name) return 1;
+                return 0;
+              });
+      }
 
       return {
         ...state,
@@ -98,18 +106,23 @@ function rootReducer(state = initialState, action) {
       };
 
     case SORT_BY_RATING:
-      const ratingSort =
-        action.payload === "low"
-          ? state.videogames.sort((a, b) => {
-              if (a.rating > b.rating) return 1;
-              if (b.rating > a.rating) return -1;
-              return 0;
-            })
-          : state.videogames.sort((a, b) => {
-              if (a.rating > b.rating) return -1;
-              if (b.rating > a.rating) return 1;
-              return 0;
-            });
+      let ratingSort;
+      if (action.payload === "default") {
+        ratingSort = [...state.allVideogames];
+      } else {
+        ratingSort =
+          action.payload === "low"
+            ? state.videogames.sort((a, b) => {
+                if (a.rating > b.rating) return 1;
+                if (b.rating > a.rating) return -1;
+                return 0;
+              })
+            : state.videogames.sort((a, b) => {
+                if (a.rating > b.rating) return -1;
+                if (b.rating > a.rating) return 1;
+                return 0;
+              });
+      }
 
       return {
         ...state,
@@ -117,25 +130,28 @@ function rootReducer(state = initialState, action) {
       };
 
     case GET_DETAIL_VIDEOGAME:
-      let videogameInfo = { ...action.payload };
-      // console.log(action.payload);
-      // console.log(videogameInfo);
+      let videogameInfo;
+      if (!Array.isArray(action.payload)) {
+        videogameInfo = { ...action.payload };
 
-      if (videogameInfo.genres.length) {
-        videogameInfo.genres =
-          typeof videogameInfo.genres[0] !== "string"
-            ? videogameInfo.genres.map((g) => g.name).join(", ")
-            : videogameInfo.genres.join(", ");
+        if (videogameInfo.genres.length) {
+          videogameInfo.genres =
+            typeof videogameInfo.genres[0] !== "string"
+              ? videogameInfo.genres.map((g) => g.name).join(", ")
+              : videogameInfo.genres.join(", ");
+        } else {
+          videogameInfo.genres = `No Genres`;
+        }
+
+        if (videogameInfo.platforms.length) {
+          videogameInfo.platforms = videogameInfo.platforms.join(", ");
+        } else {
+          videogameInfo.platforms = `No Platforms`;
+        }
       } else {
-        videogameInfo.genres = `No Genres`;
+        videogameInfo = [...action.payload];
       }
-
-      if (videogameInfo.platforms.length) {
-        videogameInfo.platforms = videogameInfo.platforms.join(", ");
-      } else {
-        videogameInfo.platforms = `No Platforms`;
-      }
-
+      console.log(videogameInfo);
       return {
         ...state,
         detail: videogameInfo,
@@ -157,6 +173,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         platforms: action.payload,
+      };
+
+    case GO_BACK_HOME:
+      return {
+        ...state,
+        videogames: state.allVideogames,
       };
 
     default:

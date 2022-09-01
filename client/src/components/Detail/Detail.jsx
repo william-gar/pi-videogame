@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import style from "./Detail.module.css";
 import marioGif from "../../assets/images/mario.gif";
 import defaultImage from "../../assets/images/default-image-detail.png";
+import ErrorNotFound from "../ErrorNotFound/ErrorNotFound";
 const stars = ["⭐", "⭐", "⭐", "⭐", "⭐"];
 
 export default function Detail(props) {
@@ -14,62 +15,69 @@ export default function Detail(props) {
 
   useEffect(() => {
     dispatch(getDetailVideogame(props.match.params.id));
+
+    return () => {
+      dispatch(resetDetail());
+    };
   }, []);
 
   const videogame = useSelector((state) => state.detail);
 
-  function handleResetDetail() {
-    dispatch(resetDetail());
-  }
+  // function handleResetDetail() {
+  //   dispatch(resetDetail());
+  // }
 
   const { name, description, released, rating, platforms, image, genres } =
     videogame;
 
   return (
     <div className={style.componentDetail}>
-      <Link to="/home">
-        <button
-          className={style.goBackDetail}
-          onClick={() => handleResetDetail()}
-        >
-          &#8592; Go Back
-        </button>
-      </Link>
-
-      {name ? (
-        <div className={style.containerDetail}>
-          <div className={style.imageDetail}>
-            <img src={image ? image : defaultImage} alt={`pic-${name}`} />
-          </div>
-          <div className={style.infoDetail}>
-            <div className={style.nameDetail}>
-              <h1>{name}</h1>
+      {videogame[0] === "Error" ? (
+        <ErrorNotFound />
+      ) : name ? (
+        <div>
+          <Link to="/home">
+            <button
+              className={style.goBackDetail}
+              // onClick={() => handleResetDetail()}
+            >
+              &#8592; Go Back Home
+            </button>
+          </Link>
+          <div className={style.containerDetail}>
+            <div className={style.imageDetail}>
+              <img src={image ? image : defaultImage} alt={`pic-${name}`} />
             </div>
-            <div className={style.ratingDetail}>
-              <h3>&nbsp;{rating}</h3>
-              <h4>
-                {rating ? stars.slice(0, Math.floor(rating)).join("") : `---`}
-              </h4>
-            </div>
-            <div className={style.genresDetail}>
-              <h3>
-                <span>Genres:</span> {genres}
-              </h3>
-            </div>
-            <div className={style.containerDescriptionDetail}>
-              <div className={style.descriptionDetail}>
-                <p>{description}</p>
+            <div className={style.infoDetail}>
+              <div className={style.nameDetail}>
+                <h1>{name}</h1>
               </div>
-            </div>
-            <div className={style.releasedDetail}>
-              <h4>
-                <span>Released:</span> {released ? released : `No Info`}
-              </h4>
-            </div>
-            <div className={style.platformsDetail}>
-              <h4>
-                <span>Platforms:</span> {platforms}
-              </h4>
+              <div className={style.ratingDetail}>
+                <h3>&nbsp;{rating}</h3>
+                <h4>
+                  {rating ? stars.slice(0, Math.floor(rating)).join("") : `---`}
+                </h4>
+              </div>
+              <div className={style.genresDetail}>
+                <h3>
+                  <span>Genres:</span> {genres}
+                </h3>
+              </div>
+              <div className={style.containerDescriptionDetail}>
+                <div className={style.descriptionDetail}>
+                  <p>{description}</p>
+                </div>
+              </div>
+              <div className={style.releasedDetail}>
+                <h4>
+                  <span>Released:</span> {released ? released : `No Info`}
+                </h4>
+              </div>
+              <div className={style.platformsDetail}>
+                <h4>
+                  <span>Platforms:</span> {platforms}
+                </h4>
+              </div>
             </div>
           </div>
         </div>

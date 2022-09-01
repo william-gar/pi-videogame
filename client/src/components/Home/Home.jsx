@@ -19,6 +19,7 @@ import FilterByGenre from "../FilterByGenre/FilterByGenre";
 import FilterApiOrDb from "../FilterApiOrDb/FilterApiOrDb";
 import AlphabeticalSort from "../AlphabeticalSort/AlphabeticalSort";
 import SortByRating from "../SortByRating/SortByRating";
+import ErrorNotFound from "../ErrorNotFound/ErrorNotFound";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -93,7 +94,9 @@ export default function Home() {
         currentPage={currentPage}
         lastPage={lastPage}
       />
-      {allVideogames.length === 0 ? (
+      {allVideogames.length === 1 && allVideogames[0] === "Error" ? (
+        <ErrorNotFound />
+      ) : allVideogames.length === 0 ? (
         <div className={style.loading}>
           <img src={metalSlug} alt="img-loading" />
           <div>

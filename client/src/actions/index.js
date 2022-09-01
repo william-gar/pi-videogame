@@ -10,16 +10,30 @@ import {
   GET_DETAIL_VIDEOGAME,
   RESET_DETAIL,
   GET_PLATFORMS,
+  GO_BACK_HOME,
 } from "../types";
 
-export function getVideogames() {
-  return async function (dispatch) {
-    let json = await axios(`http://localhost:3001/videogames`);
+// export function getVideogames() {
+//   return async function (dispatch) {
+//     let json = await axios(`http://localhost:3001/videogames`);
 
-    return dispatch({
-      type: GET_VIDEOGAMES,
-      payload: json.data,
-    });
+//     return dispatch({
+//       type: GET_VIDEOGAMES,
+//       payload: json.data,
+//     });
+//   };
+// }
+
+export function getVideogames() {
+  return function (dispatch) {
+    fetch(`http://localhost:3001/videogames`)
+      .then((response) => response.json())
+      .then((data) =>
+        dispatch({
+          type: GET_VIDEOGAMES,
+          payload: data,
+        })
+      );
   };
 }
 
@@ -104,7 +118,7 @@ export function postVideogame(payload) {
       `http://localhost:3001/videogames`,
       payload
     );
-    console.log(videogameCreate);
+    // console.log(videogameCreate);
     return videogameCreate;
   };
 }
@@ -117,6 +131,12 @@ export function getPlatforms() {
       type: GET_PLATFORMS,
       payload: platforms.data,
     });
+  };
+}
+
+export function goBackHome() {
+  return {
+    type: GO_BACK_HOME,
   };
 }
 

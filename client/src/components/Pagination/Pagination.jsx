@@ -16,7 +16,7 @@ export default function Pagination({
 
   return (
     <div>
-      {pageNumbers.length === 0 ? null : (
+      {pageNumbers.length <= 1 ? null : (
         <nav className={style.pagination}>
           <ul>
             {pageNumbers.length > 1 ? (
