@@ -1,11 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { alphabeticalSort } from "../../actions";
 
-export default function AlphabeticalSort({ handleAlphabeticalSort }) {
+export default function AlphabeticalSort({ handleSetCurrentPage }) {
+  const dispatch = useDispatch();
+
+  const handleAlphabeticalSort = (e) => {
+    handleSetCurrentPage();
+    dispatch(alphabeticalSort(e.target.value));
+  };
   return (
     <>
       <select
         defaultValue="default"
-        onChange={(e) => handleAlphabeticalSort(e, 1)}
+        onChange={(e) => handleAlphabeticalSort(e)}
       >
         <option disabled value="default">
           Alphabetical Sort

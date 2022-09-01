@@ -7,7 +7,7 @@ import {
   getGenres,
   // filterByGenre,
   // filterByApiOrDb,
-  alphabeticalSort,
+  // alphabeticalSort,
   sortByRating,
 } from "../../actions/index";
 import { Card } from "../Card/Card";
@@ -73,10 +73,10 @@ export default function Home() {
   //----------------------------------------------
 
   //--SORT FUNCTIONS------------------------------
-  const handleAlphabeticalSort = (e, p) => {
-    setCurrentPage(p);
-    dispatch(alphabeticalSort(e.target.value));
-  };
+  // const handleAlphabeticalSort = (e, p) => {
+  //   setCurrentPage(p);
+  //   dispatch(alphabeticalSort(e.target.value));
+  // };
 
   const handleSortByRating = (e, p) => {
     setCurrentPage(p);
@@ -128,9 +128,7 @@ export default function Home() {
                 <FilterApiOrDb handleSetCurrentPage={handleSetCurrentPage} />
               </div>
               <div className={style.containerFilter}>
-                <AlphabeticalSort
-                  handleAlphabeticalSort={handleAlphabeticalSort}
-                />
+                <AlphabeticalSort handleSetCurrentPage={handleSetCurrentPage} />
               </div>
               <div className={style.containerFilter}>
                 <SortByRating handleSortByRating={handleSortByRating} />
