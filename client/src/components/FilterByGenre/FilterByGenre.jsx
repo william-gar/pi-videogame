@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterByGenre } from "../../actions";
+import { filterByGenre, getGenres } from "../../actions";
 
 export default function FilterByGenre({ handleSetCurrentPage }) {
   const dispatch = useDispatch();
   const allGenres = useSelector((state) => state.genres);
+
+  useEffect(() => {
+    if (!allGenres.length) dispatch(getGenres());
+  }, []);
 
   const handleFilterByGenre = (e) => {
     handleSetCurrentPage();
