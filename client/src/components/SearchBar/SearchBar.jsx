@@ -14,8 +14,8 @@ export default function SearchBar() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(getVideogamesByName(nameVideogame));
+    // e.preventDefault();
+    dispatch(getVideogamesByName(nameVideogame.trim()));
     setNameVideogame("");
   };
   return (
