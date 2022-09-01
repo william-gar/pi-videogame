@@ -66,10 +66,6 @@
   align-items: center;
 }
 
-/* .containerFilter {
-  border: 1px solid #fff;
-} */
-
 .containerFilter select {
   height: 30px;
   /* width: 130px; */
@@ -98,23 +94,6 @@
   cursor: pointer;
   background-color: rgb(175, 46, 46);
   transition: 0.3s;
-}
-
-.cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 50px;
-  /* background-color: #ffeeff25; */
-  padding: 170px 0;
-  height: max-content;
-  width: 80%;
-  /* border: 1px solid #fff; */
-  margin: auto;
-}
-
-.linkCard {
-  text-decoration: none;
 }
 
 .loading {

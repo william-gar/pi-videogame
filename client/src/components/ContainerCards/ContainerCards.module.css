@@ -1,0 +1,16 @@
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  /* background-color: #ffeeff25; */
+  padding: 170px 0;
+  height: max-content;
+  width: 80%;
+  /* border: 1px solid #fff; */
+  margin: auto;
+}
+
+.linkCard {
+  text-decoration: none;
+}
