@@ -109,8 +109,8 @@ export default function CreateVideogame() {
   };
 
   const handleSelect = (e) => {
-    console.log("Name: ", e.target.name);
-    console.log("Value: ", e.target.value);
+    // console.log("Name: ", e.target.name);
+    // console.log("Value: ", e.target.value);
     setInputsErrors(
       inputsValidator({
         ...input,
@@ -170,6 +170,12 @@ export default function CreateVideogame() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // setInput({
+    //   ...input,
+    //   name: input.name.trim(),
+    //   image: input.image.trim(),
+    //   description: input.description.trim(),
+    // });
     // console.log(input);
     if (Object.keys(inputsErrors).length === 0 && validator) {
       dispatch(postVideogame(input));
