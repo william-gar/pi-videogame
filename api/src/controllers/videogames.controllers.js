@@ -104,7 +104,7 @@ const getAllVideogames = async (req, res) => {
   const dbVideogames = await getVideogamesDb();
 
   if (name) {
-    name = name.toLowerCase();
+    name = name.toLowerCase().trim();
     let quantity = 15;
 
     let nameDb = dbVideogames.filter((game) =>
