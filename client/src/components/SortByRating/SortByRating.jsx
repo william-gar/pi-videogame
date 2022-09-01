@@ -1,12 +1,21 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { sortByRating } from "../../actions";
 
-export default function SortByRating({ handleSortByRating }) {
+export default function SortByRating({ handleSetCurrentPage }) {
+  const dispatch = useDispatch();
+
+  const handleSortByRating = (e) => {
+    handleSetCurrentPage();
+    dispatch(sortByRating(e.target.value));
+  };
+
   return (
     <>
       <select
         name="select"
         defaultValue="default"
-        onChange={(e) => handleSortByRating(e, 1)}
+        onChange={(e) => handleSortByRating(e)}
       >
         <option disabled value="default">
           Rating

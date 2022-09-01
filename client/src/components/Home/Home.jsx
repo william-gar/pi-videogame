@@ -8,7 +8,7 @@ import {
   // filterByGenre,
   // filterByApiOrDb,
   // alphabeticalSort,
-  sortByRating,
+  // sortByRating,
 } from "../../actions/index";
 import { Card } from "../Card/Card";
 import style from "./Home.module.css";
@@ -78,10 +78,10 @@ export default function Home() {
   //   dispatch(alphabeticalSort(e.target.value));
   // };
 
-  const handleSortByRating = (e, p) => {
-    setCurrentPage(p);
-    dispatch(sortByRating(e.target.value));
-  };
+  // const handleSortByRating = (e, p) => {
+  //   setCurrentPage(p);
+  //   dispatch(sortByRating(e.target.value));
+  // };
   //----------------------------------------------
 
   const handleRefresh = (e) => {
@@ -131,7 +131,7 @@ export default function Home() {
                 <AlphabeticalSort handleSetCurrentPage={handleSetCurrentPage} />
               </div>
               <div className={style.containerFilter}>
-                <SortByRating handleSortByRating={handleSortByRating} />
+                <SortByRating handleSetCurrentPage={handleSetCurrentPage} />
               </div>
               <div>
                 <SearchBar />
