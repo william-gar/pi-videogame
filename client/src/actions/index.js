@@ -13,33 +13,33 @@ import {
   GO_BACK_HOME,
 } from "../types";
 
-// export function getVideogames() {
-//   return async function (dispatch) {
-//     let json = await axios(`http://localhost:3001/videogames`);
-
-//     return dispatch({
-//       type: GET_VIDEOGAMES,
-//       payload: json.data,
-//     });
-//   };
-// }
-
 export function getVideogames() {
-  return function (dispatch) {
-    fetch(`http://localhost:3001/videogames`)
-      .then((response) => response.json())
-      .then((data) =>
-        dispatch({
-          type: GET_VIDEOGAMES,
-          payload: data,
-        })
-      );
+  return async function (dispatch) {
+    let json = await axios(`/videogames`);
+
+    return dispatch({
+      type: GET_VIDEOGAMES,
+      payload: json.data,
+    });
   };
 }
 
+// export function getVideogames() {
+//   return function (dispatch) {
+//     fetch(`http://localhost:3001/videogames`)
+//       .then((response) => response.json())
+//       .then((data) =>
+//         dispatch({
+//           type: GET_VIDEOGAMES,
+//           payload: data,
+//         })
+//       );
+//   };
+// }
+
 export function getGenres() {
   return async function (dispatch) {
-    let genres = await axios(`http://localhost:3001/genres`);
+    let genres = await axios(`/genres`);
 
     return dispatch({
       type: GET_GENRES,
@@ -78,9 +78,7 @@ export function sortByRating(payload) {
 
 export function getVideogamesByName(name) {
   return async function (dispatch) {
-    let videogamesByName = await axios(
-      `http://localhost:3001/videogames?name=${name}`
-    );
+    let videogamesByName = await axios(`/videogames?name=${name}`);
 
     return dispatch({
       type: GET_VIDEOGAMES_BY_NAME,
@@ -92,9 +90,7 @@ export function getVideogamesByName(name) {
 export function getDetailVideogame(id) {
   return async function (dispatch) {
     try {
-      let videogameById = await axios.get(
-        `http://localhost:3001/videogames/${id}`
-      );
+      let videogameById = await axios.get(`/videogames/${id}`);
 
       return dispatch({
         type: GET_DETAIL_VIDEOGAME,
@@ -114,10 +110,7 @@ export function resetDetail() {
 
 export function postVideogame(payload) {
   return async function (dispatch) {
-    const videogameCreate = await axios.post(
-      `http://localhost:3001/videogames`,
-      payload
-    );
+    const videogameCreate = await axios.post(`/videogames`, payload);
     // console.log(videogameCreate);
     return videogameCreate;
   };
@@ -125,7 +118,7 @@ export function postVideogame(payload) {
 
 export function getPlatforms() {
   return async function (dispatch) {
-    let platforms = await axios(`http://localhost:3001/platforms`);
+    let platforms = await axios(`/platforms`);
 
     return dispatch({
       type: GET_PLATFORMS,
@@ -139,16 +132,3 @@ export function goBackHome() {
     type: GO_BACK_HOME,
   };
 }
-
-// export function getVideogames() {
-//   return function (dispatch) {
-//     let results = fetch(`https://localhost:3001/videogames`);
-
-//     results.then((response) => response.json()).then((res) => res);
-
-//     return dispatch({
-//       type: "GET_VIDEOGAMES",
-//       payload: results,
-//     });
-//   };
-// }
