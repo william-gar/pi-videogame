@@ -19,6 +19,7 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
+require("dotenv").config();
 // const axios = require("axios");
 const { loadGenres } = require("./src/controllers/genres.controllers");
 const { loadPlatforms } = require("./src/controllers/platforms.controllers");
