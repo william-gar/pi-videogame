@@ -139,16 +139,18 @@ function rootReducer(state = initialState, action) {
     case ALPHABETICAL_SORT:
       let alphabeticalSort;
       if (action.payload === "default") {
-        alphabeticalSort = [...state.allVideogames];
+        if (state.videogamesByName.length)
+          alphabeticalSort = [...state.videogamesByName];
+        else alphabeticalSort = [...state.allVideogames];
       } else {
         alphabeticalSort =
           action.payload === "a-z"
-            ? state.videogames.sort((a, b) => {
+            ? [...state.videogames].sort((a, b) => {
                 if (a.name > b.name) return 1;
                 if (b.name > a.name) return -1;
                 return 0;
               })
-            : state.videogames.sort((a, b) => {
+            : [...state.videogames].sort((a, b) => {
                 if (a.name > b.name) return -1;
                 if (b.name > a.name) return 1;
                 return 0;
