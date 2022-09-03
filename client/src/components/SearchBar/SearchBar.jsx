@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getVideogamesByName } from "../../actions";
+import { getVideogamesByName, resetVideogames } from "../../actions";
 import style from "./SearchBar.module.css";
 
-export default function SearchBar() {
+export default function SearchBar({ handleSetCurrentPage }) {
   const dispatch = useDispatch();
   const [nameVideogame, setNameVideogame] = useState("");
 
@@ -14,7 +14,9 @@ export default function SearchBar() {
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
+    handleSetCurrentPage();
+    dispatch(resetVideogames());
+    e.preventDefault();
     dispatch(getVideogamesByName(nameVideogame.trim()));
     setNameVideogame("");
   };
