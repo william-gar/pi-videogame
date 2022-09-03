@@ -2,7 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getVideogames } from "../../actions/index";
+import {
+  getVideogames,
+  resetVideogames,
+  memoryCurrentPage,
+} from "../../actions/index";
 import style from "./Home.module.css";
 import Pagination from "../Pagination/Pagination";
 import SearchBar from "../SearchBar/SearchBar";
@@ -17,9 +21,10 @@ import ContainerCards from "../ContainerCards/ContainerCards";
 export default function Home() {
   const dispatch = useDispatch();
   const allVideogames = useSelector((state) => state.videogames);
+  const memoryPage = useSelector((state) => state.currentPage);
 
-  //Pagination ------------------------------------------------------------------
-  const [currentPage, setCurrentPage] = useState(1);
+  //Pagination ---------------------------------------
+  const [currentPage, setCurrentPage] = useState(memoryPage);
   const [videogamesPerPage] = useState(15);
   const indexOfLastVideogame = currentPage * videogamesPerPage; //15
   const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; // 0
@@ -30,11 +35,14 @@ export default function Home() {
 
   const handleSetCurrentPage = () => {
     setCurrentPage(1);
+    dispatch(memoryCurrentPage(1));
   };
-  //-----------------------------------------------------------------------------
+
+  //--------------------------------------------------
 
   const handleRefresh = (e) => {
     e.preventDefault();
+    dispatch(resetVideogames());
     dispatch(getVideogames());
   };
 
@@ -81,7 +89,7 @@ export default function Home() {
                 <SortByRating handleSetCurrentPage={handleSetCurrentPage} />
               </div>
               <div>
-                <SearchBar />
+                <SearchBar handleSetCurrentPage={handleSetCurrentPage} />
               </div>
               <div className={style.containerButtonCreate}>
                 <Link to="/create-videogame">
@@ -90,7 +98,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <ContainerCards currentVideogames={currentVideogames} />
+          <ContainerCards
+            currentVideogames={currentVideogames}
+            currentPage={currentPage}
+          />
         </div>
       )}
     </div>

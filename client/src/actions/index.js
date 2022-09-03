@@ -11,6 +11,8 @@ import {
   RESET_DETAIL,
   GET_PLATFORMS,
   GO_BACK_HOME,
+  RESET_VIDEOGAMES,
+  MEMORY_CURRENT_PAGE,
 } from "../types";
 
 export function getVideogames() {
@@ -23,19 +25,6 @@ export function getVideogames() {
     });
   };
 }
-
-// export function getVideogames() {
-//   return function (dispatch) {
-//     fetch(`http://localhost:3001/videogames`)
-//       .then((response) => response.json())
-//       .then((data) =>
-//         dispatch({
-//           type: GET_VIDEOGAMES,
-//           payload: data,
-//         })
-//       );
-//   };
-// }
 
 export function getGenres() {
   return async function (dispatch) {
@@ -130,5 +119,19 @@ export function getPlatforms() {
 export function goBackHome() {
   return {
     type: GO_BACK_HOME,
+  };
+}
+
+export function resetVideogames() {
+  return {
+    type: RESET_VIDEOGAMES,
+  };
+}
+
+export function memoryCurrentPage(page) {
+  console.log(page);
+  return {
+    type: MEMORY_CURRENT_PAGE,
+    payload: page,
   };
 }

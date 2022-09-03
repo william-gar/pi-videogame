@@ -11,6 +11,8 @@ import {
   POST_VIDEOGAME,
   GET_PLATFORMS,
   GO_BACK_HOME,
+  RESET_VIDEOGAMES,
+  MEMORY_CURRENT_PAGE,
 } from "../types";
 
 const initialState = {
@@ -19,6 +21,7 @@ const initialState = {
   genres: [],
   platforms: [],
   detail: [],
+  currentPage: 1,
 };
 
 function rootReducer(state = initialState, action) {
@@ -182,6 +185,18 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         videogames: state.allVideogames,
+      };
+
+    case RESET_VIDEOGAMES:
+      return {
+        ...state,
+        videogames: [],
+      };
+
+    case MEMORY_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
       };
 
     default:

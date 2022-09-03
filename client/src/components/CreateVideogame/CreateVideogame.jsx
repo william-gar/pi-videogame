@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { postVideogame, getGenres, getPlatforms } from "../../actions/index";
+import {
+  postVideogame,
+  getGenres,
+  getPlatforms,
+  resetVideogames,
+  getVideogames,
+} from "../../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./CreateVideogame.module.css";
 
@@ -26,8 +32,6 @@ export default function CreateVideogame() {
     { released: "date" },
   ];
 
-  // const selects = [{ genres }, { platforms }];
-  // console.log(selects);
   const initialInputs = {
     name: "",
     image: "",
@@ -105,12 +109,9 @@ export default function CreateVideogame() {
       ...input,
       [name]: isNaN(value * 1) ? value : Number.parseFloat(value).toFixed(2),
     });
-    // console.log(typeof input.rating);
   };
 
   const handleSelect = (e) => {
-    // console.log("Name: ", e.target.name);
-    // console.log("Value: ", e.target.value);
     setInputsErrors(
       inputsValidator({
         ...input,
@@ -170,18 +171,14 @@ export default function CreateVideogame() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setInput({
-    //   ...input,
-    //   name: input.name.trim(),
-    //   image: input.image.trim(),
-    //   description: input.description.trim(),
-    // });
-    // console.log(input);
+
     if (Object.keys(inputsErrors).length === 0 && validator) {
       dispatch(postVideogame(input));
       alert("VideoGame Created");
       setInput({ ...initialInputs });
       history.push("/home");
+      dispatch(resetVideogames());
+      dispatch(getVideogames());
     } else {
       alert("Complete All Inputs!!!");
 

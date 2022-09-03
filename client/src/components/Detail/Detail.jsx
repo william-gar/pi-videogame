@@ -10,7 +10,6 @@ import ErrorNotFound from "../ErrorNotFound/ErrorNotFound";
 const stars = ["⭐", "⭐", "⭐", "⭐", "⭐"];
 
 export default function Detail(props) {
-  // console.log(props);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,10 +22,6 @@ export default function Detail(props) {
 
   const videogame = useSelector((state) => state.detail);
 
-  // function handleResetDetail() {
-  //   dispatch(resetDetail());
-  // }
-
   const { name, description, released, rating, platforms, image, genres } =
     videogame;
 
@@ -37,12 +32,7 @@ export default function Detail(props) {
       ) : name ? (
         <div>
           <Link to="/home">
-            <button
-              className={style.goBackDetail}
-              // onClick={() => handleResetDetail()}
-            >
-              &#8592; Go Back Home
-            </button>
+            <button className={style.goBackDetail}>&#8592; Go Back Home</button>
           </Link>
           <div className={style.containerDetail}>
             <div className={style.imageDetail}>
