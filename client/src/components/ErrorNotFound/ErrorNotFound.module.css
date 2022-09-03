@@ -11,7 +11,7 @@
 
 .goBackHome {
   padding: 10px;
-  margin-top: 25px;
+  margin-top: 45px;
   border-radius: 5px;
   border: 1px solid #555;
   color: #fff;
@@ -31,6 +31,7 @@
   color: #f00;
   text-shadow: -2px 1px 5px #000;
   font-size: 30px;
+  margin-top: 60px;
 }
 
 .emojiError {
@@ -41,4 +42,7 @@
   width: 400px;
   margin-top: 30px;
   filter: drop-shadow(-5px 1px 5px #333);
+  position: absolute;
+  bottom: 0;
+  margin-left: 50px;
 }
