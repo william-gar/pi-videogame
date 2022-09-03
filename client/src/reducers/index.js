@@ -21,6 +21,7 @@ const initialState = {
   genres: [],
   platforms: [],
   detail: [],
+  videogamesByName: [],
   currentPage: 1,
 };
 
@@ -44,45 +45,96 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         videogames: [...action.payload],
+        videogamesByName: [...action.payload],
       };
 
     case FILTER_BY_GENRE:
       let genreFilter;
-      if (action.payload === "All Genres") {
-        genreFilter = state.allVideogames;
+      if (state.videogamesByName.length) {
+        if (action.payload === "All Genres") {
+          genreFilter = [...state.videogamesByName];
+        } else {
+          const vGames = [...state.videogamesByName];
+          vGames.forEach((el) => {
+            if (typeof el.genres[0] !== "string") {
+              el.genres = el.genres.map((e) => e.name);
+            }
+          });
+
+          genreFilter = vGames.filter((el) =>
+            el.genres.includes(action.payload)
+          );
+        }
+        if (!genreFilter.length) genreFilter.push("Error");
+
+        return {
+          ...state,
+          videogames: [...genreFilter],
+        };
       } else {
-        const vGames = state.allVideogames;
-        vGames.forEach((el) => {
-          if (typeof el.genres[0] !== "string") {
-            el.genres = el.genres.map((e) => e.name);
-          }
-        });
+        if (action.payload === "All Genres") {
+          genreFilter = [...state.allVideogames];
+        } else {
+          const vGames = [...state.allVideogames];
+          vGames.forEach((el) => {
+            if (typeof el.genres[0] !== "string") {
+              el.genres = el.genres.map((e) => e.name);
+            }
+          });
 
-        genreFilter = vGames.filter((el) => el.genres.includes(action.payload));
+          genreFilter = vGames.filter((el) =>
+            el.genres.includes(action.payload)
+          );
+        }
+
+        if (!genreFilter.length) genreFilter.push("Error");
+
+        return {
+          ...state,
+          videogames: [...genreFilter],
+        };
       }
-
-      if (!genreFilter.length) genreFilter.push("Error");
-
-      return {
-        ...state,
-        videogames: [...genreFilter],
-      };
 
     case FILTER_BY_API_OR_DB:
       let apiOrDbFilter;
 
-      if (action.payload === "all") {
-        apiOrDbFilter = state.allVideogames;
-      } else if (action.payload === "database") {
-        apiOrDbFilter = state.allVideogames.filter((e) => e.createdInDb);
-      } else {
-        apiOrDbFilter = state.allVideogames.filter((e) => !e.createdInDb);
-      }
+      if (state.videogamesByName.length) {
+        if (action.payload === "all") {
+          apiOrDbFilter = [...state.videogamesByName];
+        } else if (action.payload === "database") {
+          apiOrDbFilter = [...state.videogamesByName].filter(
+            (e) => e.createdInDb
+          );
+        } else {
+          apiOrDbFilter = [...state.videogamesByName].filter(
+            (e) => !e.createdInDb
+          );
+        }
 
-      return {
-        ...state,
-        videogames: [...apiOrDbFilter],
-      };
+        if (!apiOrDbFilter.length) apiOrDbFilter.push("Error");
+
+        return {
+          ...state,
+          videogames: [...apiOrDbFilter],
+        };
+      } else {
+        if (action.payload === "all") {
+          apiOrDbFilter = [...state.allVideogames];
+        } else if (action.payload === "database") {
+          apiOrDbFilter = [...state.allVideogames].filter((e) => e.createdInDb);
+        } else {
+          apiOrDbFilter = [...state.allVideogames].filter(
+            (e) => !e.createdInDb
+          );
+        }
+
+        if (!apiOrDbFilter.length) apiOrDbFilter.push("Error");
+
+        return {
+          ...state,
+          videogames: [...apiOrDbFilter],
+        };
+      }
 
     case ALPHABETICAL_SORT:
       let alphabeticalSort;
@@ -157,14 +209,13 @@ function rootReducer(state = initialState, action) {
       } else {
         videogameInfo = [...action.payload];
       }
-      // console.log(videogameInfo);
+
       return {
         ...state,
         detail: videogameInfo,
       };
 
     case RESET_DETAIL:
-      // console.log(state.videogames);
       return {
         ...state,
         detail: [],
@@ -182,15 +233,20 @@ function rootReducer(state = initialState, action) {
       };
 
     case GO_BACK_HOME:
+      if (state.videogamesByName.length) {
+        state.videogames = [...state.videogamesByName];
+      } else {
+        state.videogames = [...state.allVideogames];
+      }
       return {
         ...state,
-        videogames: state.allVideogames,
       };
 
     case RESET_VIDEOGAMES:
       return {
         ...state,
         videogames: [],
+        videogamesByName: [],
       };
 
     case MEMORY_CURRENT_PAGE:
