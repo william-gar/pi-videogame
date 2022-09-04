@@ -1,10 +1,33 @@
+.containerVideogamesByName {
+  padding: 130px 0;
+}
+
+.returnAllVideogames {
+  /* margin-bottom: 80px; */
+  padding: 10px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  border: 1px solid #555;
+  color: #fff;
+  background-color: #222;
+  font-family: monospace;
+  font-size: 20px;
+}
+
+.returnAllVideogames:hover {
+  background-color: #111;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
 .cards {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 50px;
   /* background-color: #ffeeff25; */
-  padding: 170px 0;
+  padding: 50px 0;
   height: max-content;
   width: 80%;
   /* border: 1px solid #fff; */

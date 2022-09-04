@@ -101,6 +101,7 @@ export default function Home() {
           <ContainerCards
             currentVideogames={currentVideogames}
             currentPage={currentPage}
+            allVideogames={allVideogames}
           />
         </div>
       )}

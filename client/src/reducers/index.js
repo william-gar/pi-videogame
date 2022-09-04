@@ -13,6 +13,7 @@ import {
   GO_BACK_HOME,
   RESET_VIDEOGAMES,
   MEMORY_CURRENT_PAGE,
+  FROM_BY_NAME_TO_ALLVIDEOGAMES,
 } from "../types";
 
 const initialState = {
@@ -165,16 +166,18 @@ function rootReducer(state = initialState, action) {
     case SORT_BY_RATING:
       let ratingSort;
       if (action.payload === "default") {
-        ratingSort = [...state.allVideogames];
+        if (state.videogamesByName.length)
+          ratingSort = [...state.videogamesByName];
+        else ratingSort = [...state.allVideogames];
       } else {
         ratingSort =
           action.payload === "low"
-            ? state.videogames.sort((a, b) => {
+            ? [...state.videogames].sort((a, b) => {
                 if (a.rating > b.rating) return 1;
                 if (b.rating > a.rating) return -1;
                 return 0;
               })
-            : state.videogames.sort((a, b) => {
+            : [...state.videogames].sort((a, b) => {
                 if (a.rating > b.rating) return -1;
                 if (b.rating > a.rating) return 1;
                 return 0;
@@ -255,6 +258,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         currentPage: action.payload,
+      };
+
+    case FROM_BY_NAME_TO_ALLVIDEOGAMES:
+      return {
+        ...state,
+        videogames: [...state.allVideogames],
+        videogamesByName: [],
       };
 
     default:

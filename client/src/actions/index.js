@@ -13,6 +13,7 @@ import {
   GO_BACK_HOME,
   RESET_VIDEOGAMES,
   MEMORY_CURRENT_PAGE,
+  FROM_BY_NAME_TO_ALLVIDEOGAMES,
 } from "../types";
 
 export function getVideogames() {
@@ -125,6 +126,12 @@ export function goBackHome() {
 export function resetVideogames() {
   return {
     type: RESET_VIDEOGAMES,
+  };
+}
+
+export function fromByNameToAllVideogames() {
+  return {
+    type: FROM_BY_NAME_TO_ALLVIDEOGAMES,
   };
 }
 
