@@ -45,7 +45,6 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
-  /* min-width: 50%; */
   justify-content: center;
 }
 
@@ -115,20 +114,12 @@
 
 .descriptionDetail::-webkit-scrollbar {
   -webkit-appearance: none;
+  background-color: transparent;
 }
 
 .descriptionDetail::-webkit-scrollbar:vertical {
   width: 9px;
 }
-
-/* .descriptionDetail::-webkit-scrollbar-button:increment,
-.contenedor::-webkit-scrollbar-button {
-  display: none;
-} */
-
-/* .descriptionDetail::-webkit-scrollbar:horizontal {
-  width: 5px;
-} */
 
 .descriptionDetail::-webkit-scrollbar-thumb {
   background-color: #313d47;
