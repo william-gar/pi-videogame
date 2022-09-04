@@ -33,6 +33,17 @@
   color: #ffff00;
 }
 
-.disconnect {
-  pointer-events: none;
+.pagination .disconnect {
+  background-color: #888888;
+  color: #aaaaaa;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.pagination .disconnect:hover {
+  background-color: #888888;
+  color: #aaaaaa;
+  cursor: no-drop;
 }
