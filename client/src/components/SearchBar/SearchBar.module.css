@@ -13,6 +13,11 @@
   margin: auto;
 }
 
+.searchBar form {
+  display: flex;
+  gap: 5px;
+}
+
 .search {
   height: 25px;
   border: 1px solid #999;
@@ -42,6 +47,7 @@
 
 .submit:hover {
   cursor: pointer;
+  background-color: #ffffff25;
   transform: scale(1.1);
   transition: 0.5s;
 }
