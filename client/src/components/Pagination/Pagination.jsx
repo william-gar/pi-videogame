@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import style from "./Pagination.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames } from "../../actions";
+import { getVideogames, memoryCurrentPage } from "../../actions";
 
 export default function Pagination({
   currentPage,
@@ -19,12 +19,20 @@ export default function Pagination({
   const lastPage = Math.ceil(allVideogames.length / videogamesPerPage);
 
   const paginado = (pageNumber) => {
-    if (pageNumber === "prev" && currentPage > 1)
+    if (pageNumber === "prev" && currentPage > 1) {
       setCurrentPage(currentPage - 1);
-    if (pageNumber === "next" && currentPage < lastPage)
-      setCurrentPage(currentPage + 1);
+      dispatch(memoryCurrentPage(currentPage - 1));
+    }
 
-    if (typeof pageNumber === "number") setCurrentPage(pageNumber);
+    if (pageNumber === "next" && currentPage < lastPage) {
+      setCurrentPage(currentPage + 1);
+      dispatch(memoryCurrentPage(currentPage + 1));
+    }
+
+    if (typeof pageNumber === "number") {
+      setCurrentPage(pageNumber);
+      dispatch(memoryCurrentPage(pageNumber));
+    }
   };
 
   //--------------------------------------------------------------------

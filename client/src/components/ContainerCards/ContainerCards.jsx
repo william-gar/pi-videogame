@@ -2,19 +2,11 @@ import React from "react";
 import { Card } from "../Card/Card";
 import style from "./ContainerCards.module.css";
 import { Link } from "react-router-dom";
-import { memoryCurrentPage, fromByNameToAllVideogames } from "../../actions";
+import { fromByNameToAllVideogames } from "../../actions";
 import { useDispatch } from "react-redux";
 
-export default function ContainerCards({
-  currentVideogames,
-  currentPage,
-  allVideogames,
-}) {
+export default function ContainerCards({ currentVideogames, allVideogames }) {
   const dispatch = useDispatch();
-
-  const handleMemoryCurrentPage = () => {
-    dispatch(memoryCurrentPage(currentPage));
-  };
 
   const handleFromByNameToVideogame = () => {
     dispatch(fromByNameToAllVideogames());
@@ -34,7 +26,7 @@ export default function ContainerCards({
       <div className={style.cards}>
         {currentVideogames?.map((el) => {
           return (
-            <fragment onClick={() => handleMemoryCurrentPage()}>
+            <fragment>
               <Link to={`/home/${el.id}`} className={style.linkCard}>
                 <Card
                   name={el.name}

@@ -42,6 +42,7 @@ export default function Home() {
 
   const handleRefresh = (e) => {
     e.preventDefault();
+    handleSetCurrentPage();
     dispatch(resetVideogames());
     dispatch(getVideogames());
   };
@@ -100,7 +101,6 @@ export default function Home() {
           </div>
           <ContainerCards
             currentVideogames={currentVideogames}
-            currentPage={currentPage}
             allVideogames={allVideogames}
           />
         </div>
