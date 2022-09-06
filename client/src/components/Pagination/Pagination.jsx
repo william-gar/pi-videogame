@@ -18,7 +18,7 @@ export default function Pagination({
 
   const lastPage = Math.ceil(allVideogames.length / videogamesPerPage);
 
-  const paginado = (pageNumber) => {
+  const paginated = (pageNumber) => {
     if (pageNumber === "prev" && currentPage > 1) {
       setCurrentPage(currentPage - 1);
       dispatch(memoryCurrentPage(currentPage - 1));
@@ -37,14 +37,14 @@ export default function Pagination({
 
   //--------------------------------------------------------------------
   const pageNumbers = [];
+  const initialPage = 1;
+  const totalPages = Math.ceil(allVideogames.length / videogamesPerPage);
 
-  for (
-    let i = 1;
-    i <= Math.ceil(allVideogames.length / videogamesPerPage);
-    i++
-  ) {
-    pageNumbers.push(i);
-  }
+  // Recursion
+  const func = (page) =>
+    page <= totalPages ? (pageNumbers.push(page), func(++page)) : 0;
+
+  func(initialPage);
 
   return (
     <div>
@@ -53,7 +53,7 @@ export default function Pagination({
           <ul>
             {pageNumbers.length > 1 ? (
               <li
-                onClick={() => paginado("prev")}
+                onClick={() => paginated("prev")}
                 className={currentPage === 1 ? style.disconnect : ""}
               >
                 &#9650;
@@ -65,14 +65,14 @@ export default function Pagination({
                   key={number}
                   className={currentPage === number ? style.active : ""}
                 >
-                  <a onClick={() => paginado(number)} href>
+                  <a onClick={() => paginated(number)} href>
                     {number}
                   </a>
                 </li>
               ))}
             {pageNumbers.length > 1 ? (
               <li
-                onClick={() => paginado("next")}
+                onClick={() => paginated("next")}
                 className={currentPage === lastPage ? style.disconnect : ""}
               >
                 &#9660;
