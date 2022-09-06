@@ -1,22 +1,16 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import {
   getVideogames,
   resetVideogames,
   memoryCurrentPage,
 } from "../../actions/index";
-import style from "./Home.module.css";
-import Pagination from "../Pagination/Pagination";
-import SearchBar from "../SearchBar/SearchBar";
-import metalSlug from "../../assets/images/metal-slug.gif";
-import FilterByGenre from "../FilterByGenre/FilterByGenre";
-import FilterApiOrDb from "../FilterApiOrDb/FilterApiOrDb";
-import AlphabeticalSort from "../AlphabeticalSort/AlphabeticalSort";
-import SortByRating from "../SortByRating/SortByRating";
-import ErrorNotFound from "../ErrorNotFound/ErrorNotFound";
+import NavBar from "../NavBar/NavBar";
 import ContainerCards from "../ContainerCards/ContainerCards";
+import Pagination from "../Pagination/Pagination";
+import metalSlug from "../../assets/images/metal-slug.gif";
+import ErrorNotFound from "../ErrorNotFound/ErrorNotFound";
+import style from "./Home.module.css";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -66,38 +60,10 @@ export default function Home() {
       ) : (
         <div>
           <div className={style.navBar}>
-            <div className={style.titleHome}>
-              <h1>VideoGames</h1>
-              <button
-                type="button"
-                onClick={(e) => handleRefresh(e)}
-                className={style.buttonRefresh}
-              >
-                Refresh &#8635;
-              </button>
-            </div>
-            <div className={style.containerAllMenu}>
-              <div className={style.containerFilter}>
-                <FilterByGenre handleSetCurrentPage={handleSetCurrentPage} />
-              </div>
-              <div className={style.containerFilter}>
-                <FilterApiOrDb handleSetCurrentPage={handleSetCurrentPage} />
-              </div>
-              <div className={style.containerFilter}>
-                <AlphabeticalSort handleSetCurrentPage={handleSetCurrentPage} />
-              </div>
-              <div className={style.containerFilter}>
-                <SortByRating handleSetCurrentPage={handleSetCurrentPage} />
-              </div>
-              <div>
-                <SearchBar handleSetCurrentPage={handleSetCurrentPage} />
-              </div>
-              <div className={style.containerButtonCreate}>
-                <Link to="/create-videogame">
-                  <button>Create</button>
-                </Link>
-              </div>
-            </div>
+            <NavBar
+              handleRefresh={handleRefresh}
+              handleSetCurrentPage={handleSetCurrentPage}
+            />
           </div>
           <ContainerCards
             currentVideogames={currentVideogames}
