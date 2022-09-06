@@ -6,6 +6,8 @@ import AlphabeticalSort from "../AlphabeticalSort/AlphabeticalSort";
 import SortByRating from "../SortByRating/SortByRating";
 import SearchBar from "../SearchBar/SearchBar";
 import style from "./NavBar.module.css";
+import gitHubIcon from "../../assets/images/icons/github.svg";
+import linkedinIcon from "../../assets/images/icons/linkedin.svg";
 
 export default function NavBar({ handleRefresh, handleSetCurrentPage }) {
   return (
@@ -19,6 +21,21 @@ export default function NavBar({ handleRefresh, handleSetCurrentPage }) {
         >
           Refresh &#8635;
         </button>
+        <div className={style.containerDevInfo}>
+          <div className={style.devName}>
+            <h5>by William Garcia</h5>
+          </div>
+          <div className={style.devGitHub}>
+            <a href="https://github.com/william-gar" target="blank">
+              <img src={gitHubIcon} alt="githubIcon" />
+            </a>
+          </div>
+          <div className={style.devLinkedin}>
+            <a href="https://www.linkedin.com/in/williamgar/" target="blank">
+              <img src={linkedinIcon} alt="linkedinIcon" />
+            </a>
+          </div>
+        </div>
       </div>
       <div className={style.containerAllMenu}>
         <div className={style.containerFilter}>
