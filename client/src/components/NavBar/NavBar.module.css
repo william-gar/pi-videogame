@@ -71,11 +71,11 @@
 
 .containerFilter select {
   height: 30px;
-  /* width: 130px; */
   font-size: 17px;
   background-color: #444;
   color: #ddd;
-  border-radius: 3px;
+  border: 1px solid #555555;
+  border-radius: 5px;
 }
 
 .containerFilter select:hover {
