@@ -17,7 +17,7 @@ export default function Home() {
   const allVideogames = useSelector((state) => state.videogames);
   const memoryPage = useSelector((state) => state.currentPage);
 
-  //Pagination ---------------------------------------
+  //Set VideoGames per page and current page ---------
   const [currentPage, setCurrentPage] = useState(memoryPage);
   const [videogamesPerPage] = useState(15);
   const indexOfLastVideogame = currentPage * videogamesPerPage; //15
@@ -31,7 +31,6 @@ export default function Home() {
     setCurrentPage(1);
     dispatch(memoryCurrentPage(1));
   };
-
   //--------------------------------------------------
 
   const handleRefresh = (e) => {
