@@ -92,7 +92,8 @@
 .genresDetail h3 span,
 .releasedDetail h4 span,
 .platformsDetail h4 span {
-  color: #bbb;
+  color: #ff0;
+  text-shadow: -5px -1px 5px #111;
   font-weight: bold;
   font-size: 19px;
 }
@@ -135,6 +136,19 @@
   font-size: 18px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 1px 15px;
+}
+
+.releasedDetail h4 {
+  margin: 10px 0;
+}
+
+.platformsDetail h4 {
+  background-color: #333333;
+  border: 1px solid #555;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0;
+  margin-bottom: 10px;
 }
 
 .loadingDetail {
