@@ -18,6 +18,7 @@
     url("../../assets/images/landing-background.gif");
 
   justify-content: center;
+  align-items: center;
 }
 
 .title {
@@ -30,10 +31,14 @@
 }
 
 .container h2 {
-  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
   font-weight: bold;
   font-size: 40px;
   text-shadow: 5px 5px 5px #000;
+}
+
+.containerButtonHome {
+  border-radius: 10px;
+  width: max-content;
 }
 
 .buttonHome {

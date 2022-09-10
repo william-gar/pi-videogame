@@ -7,8 +7,8 @@ export default function LandingPage() {
     <div className={style.container}>
       <h1 className={style.title}>VideoGames</h1>
       <h2>Welcome</h2>
-      <Link to="/home">
-        <button className={style.buttonHome}>Ingresar</button>
+      <Link to="/home" className={style.containerButtonHome}>
+        <button className={style.buttonHome}>Home</button>
       </Link>
     </div>
   );
