@@ -36,23 +36,36 @@
   font-family: monospace;
   font-style: italic;
   text-shadow: 5px 5px 5px rgb(167, 87, 87);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .formCreateVideogame {
-  padding-top: 50px;
-  padding-bottom: 100px;
+  padding: 10px 50px 50px 50px;
   border: 1px solid #555;
   border-radius: 10px;
-  width: 500px;
+  width: 75%;
   margin: auto;
+  margin-top: 20px;
   background-color: #222222;
   box-shadow: -8px -8px 10px #111;
 }
 
+.containerInputsAndSelects {
+  display: flex;
+  justify-content: space-around;
+}
+
+.containerOne,
+.containerTwo {
+  width: 50%;
+}
+
+.containerTwo {
+  padding-top: 30px;
+}
+
 .containerInputs {
-  /* border: 1px solid #fff; */
-  width: 80%;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -62,7 +75,6 @@
 
 .labels {
   text-transform: capitalize;
-  /* border: 1px solid #ff0; */
   width: 100%;
   font-size: 19px;
   color: #ccc;
@@ -138,7 +150,6 @@
 }
 
 .containerSelects {
-  /* border: 1px solid #fff; */
   width: 80%;
   margin: auto;
   text-align: start;
@@ -225,8 +236,35 @@
   transition: 0.5s;
 }
 
+.containerPreviousImage h4 {
+  margin: 25px 0 5px 0;
+  font-weight: normal;
+  font-style: italic;
+  color: #888888;
+  pointer-events: none;
+}
+
+.previousImage {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #444444;
+  border-radius: 5px;
+  margin: auto;
+  background-position: center;
+  background-size: cover;
+  background-color: #111;
+  pointer-events: none;
+}
+
+.previousImage img {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  border-radius: 5px;
+  color: #777777;
+}
+
 .errorsMessages {
-  /* border: 1px solid #ff0; */
   margin: 0;
   padding-left: 3px;
   font-size: 13px;
@@ -237,6 +275,32 @@
   user-select: none;
 }
 
+.containerSubmit {
+  border-radius: 5px;
+  width: max-content;
+  margin: auto;
+  position: relative;
+  margin-top: 10px;
+}
+
+.containerSubmit p {
+  border: 1px solid #777;
+  border-radius: 5px;
+  width: max-content;
+  margin: 5px auto;
+  padding: 2px 5px;
+  background-color: #ffffff;
+  color: #222222;
+  position: absolute;
+  top: -40px;
+  opacity: 0;
+}
+
+.containerSubmit:hover p {
+  opacity: 100%;
+  transition: 0.5s;
+}
+
 .buttonSubmit {
   height: 35px;
   font-size: 18px;
@@ -244,7 +308,6 @@
   border-radius: 5px;
   background-color: rgb(117, 45, 45);
   color: #fff;
-  margin-top: 40px;
 }
 
 .buttonSubmit:hover {
@@ -256,4 +319,8 @@
 
 .buttonSubmit:disabled {
   background-color: rgb(194, 151, 151);
+}
+
+.buttonSubmit:disabled:hover {
+  cursor: no-drop;
 }

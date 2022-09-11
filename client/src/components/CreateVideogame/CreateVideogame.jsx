@@ -17,7 +17,6 @@ export default function CreateVideogame() {
   let allPlatforms = useSelector((state) => state.platforms);
 
   allPlatforms = allPlatforms.slice(0, 20);
-  // console.log(platforms);
 
   const genresNames = {};
   allGenres.forEach(
@@ -54,21 +53,25 @@ export default function CreateVideogame() {
 
   const [inputsErrors, setInputsErrors] = useState({});
 
+  const imgNotFound =
+    "https://raw.githubusercontent.com/william-gar/only-images/main/readme-images/cover-image/img-not-found.jpg";
+
+  let errors = {};
+
   const inputsValidator = (form) => {
-    let errors = {};
-    let regexName = /^[A-Za-z\s]+$/;
+    let regexName = /^[A-Za-z0-9\s]+$/;
     let regexDate = /^\d{4}-\d{2}-\d{2}$/;
-    let regexImage = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpe?g|gif|png|webp|bmp)/i;
+    // let regexImage = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpe?g|gif|png|webp|bmp)/i;
 
     if (
       !regexName.test(form.name.trim()) ||
       !form.name.trim() ||
-      form.name.length > 15 ||
+      form.name.length > 40 ||
       form.name.length < 4
     )
-      errors.name = "*Name is required (min 4 char & max 15 char)";
-
-    if (!regexImage.test(form.image)) {
+      errors.name = "*Name is required (min 4 char & max 40 char)";
+    //!regexImage.test(form.image)
+    if (srcImage.src === imgNotFound) {
       errors.image = "*Image URL is required (enter a valid image url)";
     }
 
@@ -96,8 +99,11 @@ export default function CreateVideogame() {
     return errors;
   };
 
+  let srcImage = document.getElementById("imgSrc");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setInputsErrors(
       inputsValidator({
         ...input,
@@ -147,8 +153,7 @@ export default function CreateVideogame() {
             : input[k].filter((plat) => plat !== e),
       })
     );
-    console.log("e: ", e);
-    console.log("k: ", k);
+
     setInput({
       ...input,
       [k]:
@@ -172,15 +177,19 @@ export default function CreateVideogame() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (Object.keys(inputsErrors).length === 0 && validator) {
+    if (
+      Object.keys(inputsErrors).length === 0 &&
+      validator &&
+      srcImage.src !== imgNotFound
+    ) {
       dispatch(postVideogame(input));
-      alert("VideoGame Created");
+      alert(`Videogame ${input.name} Created!`);
       setInput({ ...initialInputs });
       history.push("/home");
       dispatch(resetVideogames());
       dispatch(getVideogames());
     } else {
-      alert("Complete All Inputs!!!");
+      alert("Complete All Inputs Correctly!!!");
 
       setInputsErrors(
         inputsValidator({
@@ -195,191 +204,197 @@ export default function CreateVideogame() {
       <Link to="/home">
         <button className={style.goBackHome}>&#8592; Go Home</button>
       </Link>
-      <h1 className={style.title}>Create VideoGame</h1>
       <form
         onSubmit={(e) => handleSubmit(e)}
         className={style.formCreateVideogame}
       >
-        {inputs.map((e) => {
-          return Object.values(e).join() !== "textarea" ? (
-            <div className={style.containerInputs}>
-              <div>
-                <label className={style.labels}>{Object.keys(e).join()}:</label>
-              </div>
-              <input
-                className={style.inputs}
-                type={`${Object.values(e).join()}`}
-                value={input[`"${Object.keys(e).join()}"`]}
-                name={Object.keys(e).join()}
-                placeholder={`${Object.keys(e).join()}`}
-                onChange={(e) => handleChange(e)}
-              ></input>
-              {inputsErrors[`${Object.keys(e).join()}`] && (
-                <p className={style.errorsMessages}>
-                  {inputsErrors[`${Object.keys(e).join()}`]}
-                </p>
-              )}
-            </div>
-          ) : (
-            <div className={style.containerInputs}>
-              <div>
-                <label className={style.labels}>{Object.keys(e).join()}:</label>
-              </div>
-              <textarea
-                className={style.textarea}
-                type="text"
-                value={input[`"${Object.keys(e).join()}"`]}
-                name={Object.keys(e).join()}
-                placeholder={`${Object.keys(e).join()}`}
-                onChange={(e) => handleChange(e)}
-              ></textarea>
-              {inputsErrors[`${Object.keys(e).join()}`] && (
-                <p className={style.errorsMessages}>
-                  {inputsErrors[`${Object.keys(e).join()}`]}
-                </p>
-              )}
-            </div>
-          );
-        })}
-        <div className={style.containerSelects}>
-          <select
-            defaultValue="default"
-            name="genres"
-            onChange={(e) => handleSelect(e)}
-            disabled={input.genres.length === 5}
-            className={style.selects}
-          >
-            <option value="default" disabled>
-              Genres
-            </option>
-            {allGenres.map((e) => (
-              <option value={e.id}>{e.name}</option>
-            ))}
-          </select>
-          {inputsErrors.genres ? (
-            <p className={style.errorsMessages}>{inputsErrors.genres}</p>
-          ) : null}
+        <h1 className={style.title}>Create VideoGame</h1>
+        <div className={style.containerInputsAndSelects}>
+          <div className={style.containerOne}>
+            {inputs.map((e) => {
+              return Object.values(e).join() !== "textarea" ? (
+                <div className={style.containerInputs}>
+                  <div>
+                    <label className={style.labels}>
+                      {Object.keys(e).join()}:
+                    </label>
+                  </div>
+                  <input
+                    id={Object.keys(e).join()}
+                    className={style.inputs}
+                    type={`${Object.values(e).join()}`}
+                    value={input[`"${Object.keys(e).join()}"`]}
+                    name={Object.keys(e).join()}
+                    placeholder={`${Object.keys(e).join()}`}
+                    onChange={(e) => handleChange(e)}
+                    onBlur={
+                      Object.keys(e).join() === "image"
+                        ? (e) => handleChange(e)
+                        : null
+                    }
+                    onFocus={
+                      Object.keys(e).join() === "image"
+                        ? (e) => handleChange(e)
+                        : null
+                    }
+                    onKeyUp={
+                      Object.keys(e).join() === "image"
+                        ? (e) => handleChange(e)
+                        : null
+                    }
+                  ></input>
+                  {inputsErrors[`${Object.keys(e).join()}`] && (
+                    <p className={style.errorsMessages}>
+                      {inputsErrors[`${Object.keys(e).join()}`]}
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <div className={style.containerInputs}>
+                  <div>
+                    <label className={style.labels}>
+                      {Object.keys(e).join()}:
+                    </label>
+                  </div>
+                  <textarea
+                    className={style.textarea}
+                    type="text"
+                    value={input[`"${Object.keys(e).join()}"`]}
+                    name={Object.keys(e).join()}
+                    placeholder={`${Object.keys(e).join()}`}
+                    onChange={(e) => handleChange(e)}
+                  ></textarea>
+                  {inputsErrors[`${Object.keys(e).join()}`] && (
+                    <p className={style.errorsMessages}>
+                      {inputsErrors[`${Object.keys(e).join()}`]}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <div className={style.containerTwo}>
+            <div className={style.containerSelects}>
+              <select
+                defaultValue="default"
+                name="genres"
+                onChange={(e) => handleSelect(e)}
+                disabled={input.genres.length === 5}
+                className={style.selects}
+              >
+                <option value="default" disabled>
+                  Genres
+                </option>
+                {allGenres.map((e) => (
+                  <option value={e.id}>{e.name}</option>
+                ))}
+              </select>
+              {inputsErrors.genres ? (
+                <p className={style.errorsMessages}>{inputsErrors.genres}</p>
+              ) : null}
 
-          <div>
-            <ul className={style.containerLiSelects}>
-              {input.genres.length ? (
-                input.genres.map((e) => {
-                  return (
-                    <li className={style.liSelects}>
-                      {genresNames[e]}
-                      <button
-                        type="button"
-                        className="buttonDelete"
-                        onClick={() => handleDelete(genresNames[e], "genres")}
-                      >
-                        X
-                      </button>
-                    </li>
-                  );
-                })
-              ) : (
-                <p className={style.selectEmpty}>Select min 1 Genre & max 5</p>
-              )}
-            </ul>
+              <div>
+                <ul className={style.containerLiSelects}>
+                  {input.genres.length ? (
+                    input.genres.map((e) => {
+                      return (
+                        <li className={style.liSelects}>
+                          {genresNames[e]}
+                          <button
+                            type="button"
+                            className="buttonDelete"
+                            onClick={() =>
+                              handleDelete(genresNames[e], "genres")
+                            }
+                          >
+                            X
+                          </button>
+                        </li>
+                      );
+                    })
+                  ) : (
+                    <p className={style.selectEmpty}>
+                      Select min 1 Genre & max 5
+                    </p>
+                  )}
+                </ul>
+              </div>
+            </div>
+            <div className={style.containerSelects}>
+              <select
+                defaultValue="default"
+                name="platforms"
+                onChange={(e) => handleSelect(e)}
+                disabled={input.platforms.length === 5}
+                className={style.selects}
+              >
+                <option value="default" disabled>
+                  Platforms
+                </option>
+                {allPlatforms.map((e) => (
+                  <option value={e.name}>{e.name}</option>
+                ))}
+              </select>
+
+              {inputsErrors.platforms ? (
+                <p className={style.errorsMessages}>{inputsErrors.platforms}</p>
+              ) : null}
+              <div>
+                <ul className={style.containerLiSelects}>
+                  {input.platforms.length ? (
+                    input.platforms.map((el) => (
+                      <li className={style.liSelects}>
+                        {el}
+                        <button
+                          type="button"
+                          className="buttonDelete"
+                          onClick={() => handleDelete(el, "platforms")}
+                        >
+                          X
+                        </button>
+                      </li>
+                    ))
+                  ) : (
+                    <p className={style.selectEmpty}>
+                      Select min 1 Platform & max 5
+                    </p>
+                  )}
+                </ul>
+              </div>
+            </div>
+            <div className={style.containerPreviousImage}>
+              <h4>Previous Image</h4>
+              <div className={style.previousImage}>
+                <img
+                  id="imgSrc"
+                  src={input.image}
+                  name="previousImage"
+                  onError={(e) => {
+                    console.log("Hello World!");
+                    e.target.src = imgNotFound;
+                    e.target.onerror = null;
+                  }}
+                  alt="Img-Previous"
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <div className={style.containerSelects}>
-          <select
-            defaultValue="default"
-            name="platforms"
-            onChange={(e) => handleSelect(e)}
-            disabled={input.platforms.length === 5}
-            className={style.selects}
-          >
-            <option value="default" disabled>
-              Platforms
-            </option>
-            {allPlatforms.map((e) => (
-              <option value={e.name}>{e.name}</option>
-            ))}
-          </select>
-          {/* {inputsErrors.platforms && (
-            <p className={style.errorsMessages}>{inputsErrors.platforms}</p>
-          )} */}
-          {inputsErrors.platforms ? (
-            <p className={style.errorsMessages}>{inputsErrors.platforms}</p>
+        <div className={style.containerSubmit}>
+          {Object.keys(inputsErrors).length || !validator ? (
+            <p className={style.infoCompleteInputs}>Complete All Inputs!</p>
           ) : null}
-          <div>
-            <ul className={style.containerLiSelects}>
-              {input.platforms.length ? (
-                input.platforms.map((el) => (
-                  <li className={style.liSelects}>
-                    {el}
-                    <button
-                      type="button"
-                      className="buttonDelete"
-                      onClick={() => handleDelete(el, "platforms")}
-                    >
-                      X
-                    </button>
-                  </li>
-                ))
-              ) : (
-                <p className={style.selectEmpty}>
-                  Select min 1 Platform & max 5
-                </p>
-              )}
-            </ul>
-          </div>
+          <button
+            type="submit"
+            disabled={
+              Object.keys(inputsErrors).length || !validator ? true : false
+            }
+            className={style.buttonSubmit}
+          >
+            Create VideoGame
+          </button>
         </div>
-        <button
-          type="submit"
-          disabled={
-            Object.keys(inputsErrors).length || !validator ? true : false
-          }
-          className={style.buttonSubmit}
-        >
-          Create VideoGame
-        </button>
       </form>
     </div>
   );
 }
-
-/*
-{selects.map((e) => {
-          return (
-            <div>
-              <div>
-                <label>{Object.keys(e).join()}:</label>
-              </div>
-              <div>
-                <select
-                  defaultValue="default"
-                  onChange={(e) => handleSelect(e)}
-                  name={Object.keys(e).join()}
-                >
-                  <option disabled value="default">
-                    {Object.keys(e).join()}
-                  </option>
-                  {e[`${Object.keys(e).join()}`].map((option) => {
-                    return (
-                      <option
-                        value={option.name}
-                        className={`style.${option.name}`}
-                        disabled={input[`${Object.keys(e)}`].includes(
-                          option.name
-                        )}
-                      >
-                        {option.name}
-                      </option>
-                    );
-                  })}
-                </select>
-                <ul>
-                  {input[`${Object.keys(e)}`].map((el) => {
-                    return input[`${Object.keys(e)}`].includes(el) ? (
-                      <li>{el}</li>
-                    ) : null;
-                  })}
-                </ul>
-              </div>
-            </div>
-          );
-        })}
-*/
