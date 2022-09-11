@@ -292,13 +292,12 @@
   background-color: #ffffff;
   color: #222222;
   position: absolute;
-  top: -40px;
-  opacity: 0;
+  top: -35px;
+  visibility: hidden;
 }
 
 .containerSubmit:hover p {
-  opacity: 100%;
-  transition: 0.5s;
+  visibility: visible;
 }
 
 .buttonSubmit {
