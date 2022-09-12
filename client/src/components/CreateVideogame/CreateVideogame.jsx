@@ -75,18 +75,21 @@ export default function CreateVideogame() {
       errors.image = "*Image URL is required (enter a valid image url)";
     }
 
-    if (form.description.length < 10 || form.description.length > 250)
+    if (
+      form.description.trim().length < 10 ||
+      form.description.trim().length > 250
+    )
       errors.description =
         "*Description is required (min 10 char & max 250 char)";
 
     if (!regexDate.test(form.released))
-      errors.released = "*Release date is required - format(yyyy-mm-dd)";
+      errors.released = "*Release date is required - format(dd-mm-yyyy)";
 
     if (
       isNaN(form.rating) ||
       form.rating < 0 ||
       form.rating > 5 ||
-      form.rating === ""
+      form.rating.trim() === ""
     )
       errors.rating = "*Rating is required number(min 0 & max 5)";
 
@@ -165,7 +168,6 @@ export default function CreateVideogame() {
 
   const validator =
     input.name &&
-    input.image &&
     input.description &&
     input.rating &&
     input.released &&
@@ -239,6 +241,11 @@ export default function CreateVideogame() {
                     }
                     onKeyUp={
                       Object.keys(e).join() === "image"
+                        ? (e) => handleChange(e)
+                        : null
+                    }
+                    onMouseOut={
+                      Object.keys(e).join() === "image" && validator
                         ? (e) => handleChange(e)
                         : null
                     }
