@@ -3,12 +3,12 @@
 # Project - Videogames App
 
 <div align="center">
-Puedes ver el proyecto finalizado aquí:<br><br>
+You can see the finished project here<br><br>
 👉 <a href="https://pi-videogame-two.vercel.app/"><img width="60px" src="./link-project-deploy.png" /></a> 👈
 </div>
 <hr>
 
-### Contactame:
+### Contact me:
 
 <a href="https://www.linkedin.com/in/williamgar/">
   <img src="./client/src/assets/images/icons/linkedin.png" width="40px" />
@@ -23,16 +23,16 @@ Puedes ver el proyecto finalizado aquí:<br><br>
 
 ---
 
-## Detalles del Proyecto
+## Project Details
 
-Se construyó una App utlizando ReactJS, Redux, Node, Sequelize y PostgreSQL.
+This App was built using ReactJS, Redux, Node, Sequelize and PostgreSQL.
 
-SPA en la cual se puedan ver distintos videojuegos disponibles junto con información relevante de los mismos, utilizando la api externa [rawg](https://rawg.io/apidocs) y a partir de ella poder, entre otras cosas:
+SPA in which you can see different video games available along with relevant information about them, using the [rawg](https://rawg.io/apidocs) external api and from it you can, among other things:
 
-- Buscar videjuegos
-- Filtrarlos / Ordenarlos
-- Ver el detalle con información de cada videojuego
-- Agregar nuevos videojuegos
+- Search VideoGames
+- Filter / Sort them
+- See the detail with information of each video game
+- Add new VideoGames
 
 ---
 
@@ -45,7 +45,7 @@ SPA en la cual se puedan ver distintos videojuegos disponibles junto con informa
 - GET <https://api.rawg.io/api/games/{id}>
 -->
 
-### Tecnologías utilizadas
+### Technologies
 
 [![Javascript Badge](https://img.shields.io/badge/-Javascript-F0DB4F?style=for-the-badge&labelColor=222222&logo=javascript&logoColor=F0DB4F)](#)
 [![React Badge](https://img.shields.io/badge/-React%20JS-61DBFB?style=for-the-badge&labelColor=222222&logo=react&logoColor=61DBFB)](#)
@@ -55,25 +55,27 @@ SPA en la cual se puedan ver distintos videojuegos disponibles junto con informa
 [![Sequelize Badge](https://img.shields.io/badge/-Sequelize-444444?style=for-the-badge&labelColor=222222&logo=sequelize&logoColor=ffffff)](#)
 [![PostgreSQL Badge](https://img.shields.io/badge/-Postgresql-32658E?style=for-the-badge&labelColor=222222&logo=postgresql&logoColor=ffffff)](#)
 
-## Base de datos
+---
 
-El modelo de la base de datos tiene las siguientes entidades:
+## Database
 
-- [ ] Videojuego con las siguientes propiedades:
+The database model has the following entities:
+
+- [ ] Video game with the following properties:
   - ID: UUIDV4
-  - Nombre
-  - Descripción
-  - Fecha de lanzamiento
+  - Name
+  - Description
+  - Released
   - Rating
-  - Plataformas
-- [ ] Generos con las siguientes propiedades:
+  - Platforms
+- [ ] Genres with the following properties:
   - ID
-  - Nombre
-- [ ] Plataformas con las siguientes propiedades:
+  - Name
+- [ ] Platforms with the following properties:
   - ID
-  - Nombre
+  - Name
 
-La relación entre ambas entidades es de muchos a muchos ya que un videojuego puede pertenecer a varios géneros en simultaneo y, a su vez, un género puede contener múltiples videojuegos distintos. Un ejemplo sería el juego `Counter Strike` pertenece a los géneros Shooter y Action al mismo tiempo. Pero a su vez existen otros videojuegos considerados como Shooter o como Action.
+The relationship between both entities is many-to-many since a video game can belong to several genres simultaneously and, in turn, a genre can contain multiple different video games. An example would be the game `Counter Strike` belongs to the Shooter and Action genres at the same time. But at the same time there are other video games considered as Shooter or as Action.
 
 ---
 
@@ -86,7 +88,7 @@ La relación entre ambas entidades es de muchos a muchos ya que un videojuego pu
   </div>
 </div>
 
-**NOTA**: Cuando hacemos click en algun videojuego, este puede provenir de la API o de la Base de Datos por lo que cuando se muestra su detalle no hay ambigüedad en cual se muestra.
+**NOTE**: When we click on a video game, it can come from the API or the Database, so when its detail is shown there is no ambiguity in which one is shown.
 
 ---
 
