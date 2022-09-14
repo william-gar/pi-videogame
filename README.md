@@ -8,7 +8,7 @@ Puedes ver el proyecto finalizado aquí:<br><br>
 </div>
 <hr>
 
-## Contactame:
+### Contactame:
 
 <a href="https://www.linkedin.com/in/williamgar/">
   <img src="./client/src/assets/images/icons/linkedin.png" width="40px" />
@@ -20,6 +20,8 @@ Puedes ver el proyecto finalizado aquí:<br><br>
 <div align="center">
   <img height="200" src="./mando.png" />
 </div>
+
+---
 
 ## Detalles del Proyecto
 
