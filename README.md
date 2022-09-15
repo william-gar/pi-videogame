@@ -94,82 +94,82 @@ The relationship between both entities is many-to-many since a video game can be
 
 ## Backend
 
-Se desarrolló un servidor en Node/Express con las siguientes rutas:
+A server was developed in Node/Express with the following routes:
 
 - [ ] **GET /videogames**:
-  - Obtiene un listado de los videojuegos API + DATABASE
-  - Devuelve solo los datos necesarios para la ruta principal
+  - Get a list of video games API + DATABASE
+  - Return only the data needed for the parent path
 - [ ] **GET /videogames?name="..."**:
-  - Obtiene un listado de las primeros 15 videojuegos que contengan la palabra ingresada como query parameter
-  - Si no existe ningún videojuego mostrar una ruta de errorNotFound
+  - Obtains a list of the first 15 video games that contain the word entered as a query parameter
+  - If there is no video game it shows an error
 - [ ] **GET /videogame/{idVideogame}**:
-  - Obtiene el detalle de un videojuego en particular
-  - Trae solo los datos pedidos en la ruta de detalle del videojuego
-  - Incluye los géneros asociados
+  - Get the detail of a particular video game
+  - Obtains only the requested data in the video game detail path
+  - Includes associated genres
 - [ ] **POST /videogames**:
-  - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de videojuego por body
-  - Crea un videojuego en la base de datos, relacionado a sus géneros.
+  - Receive the data collected from the controlled form of the video game creation route by body
+  - Create a video game in the database, related to their genres
 - [ ] **GET /genres**:
-  - Obtiene todos los tipos de géneros de videojuegos posibles
-  - En una primera instancia se trajeron desde la API rawg y se almacenaron en la base de datos para luego ya utilizarlos desde allí
+  - Gets all types of video game genres possible
+  - In the first instance, they were brought from the rawg API and stored in the database to later be used from there.
 - [ ] **GET /platforms**:
-  - Obtiene todos los tipos de plataformas de videojuegos posibles
-  - En una primera instancia se trajeron desde la API rawg y se almacenaron en la base de datos para luego ya utilizarlas desde allí
+  - Gets all types of video game platforms possible
+  - In a first instance, they were brought from the rawg API and stored in the database to later be used from there.
 
 ## Frontend
 
-Se desarrolló una aplicación de React/Redux que contiene las siguientes pantallas/rutas.
+Developed a React/Redux app containing the following screens/paths.
 
-**Pagina inicial**: landing page con
+**Initial Page**: landing page with
 
-- [ ] Una imagen de fondo representativa al proyecto
-- [ ] Botón para ingresar al home (`Ruta principal`)
+- [ ] A background image representative of the project
+- [ ] Button to enter home (`Main Route`)
 <div align="center">
   <img width="90%" src="./deploy-images/landingPage.png" />
 </div>
 
-**Ruta principal**: contiene
+**Main Route**: contains
 
-- [ ] Input de búsqueda para encontrar videojuegos por nombre
-- [ ] Área donde se ve el listado de videojuegos. Junto con su:
-  - Imagen
-  - Nombre
-  - Géneros
-- [ ] Botones/Opciones para filtrar por género y por videojuego existente o agregado por nosotros (dataBase)
-- [ ] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los videojuegos por orden alfabético y por rating
-- [ ] Paginado para ir buscando y mostrando los siguientes videojuegos, 15 juegos por pagina, mostrando los primeros 15 en la primer pagina.
+- [ ] Search input to find video games by name
+- [ ] Area where you can see the list of video games. Together with his:
+  - Image
+  - Name
+  - Genres
+- [ ] Buttons/Options to filter by genre and by existing video game or added by us (dataBase)
+- [ ] Buttons/Options to sort both ascending and descending the video games by alphabetical order and by rating
+- [ ] Paginated to search and display the following video games, 15 games per page, showing the first 15 on the first page.
 
-**IMPORTANTE**: Debido a que en la API existen alrededor de 500 mil juegos, por cuestiones de performance se simplificó para obtener y paginar los primeros 100 videojuegos.
+**IMPORTANT**: Since there are around 500,000 games in the API, for performance reasons it was simplified to obtain and page the first 100 video games.
 
 <div align="center">
   <img width="90%" src="./deploy-images/home.png" />
 </div>
 
-**Ruta de detalle de videojuego**: contiene
+**Video game detail path**: contains
 
-- [ ] Los campos mostrados en la ruta principal para cada videojuegos (imagen, nombre, y géneros)
-- [ ] Descripción
-- [ ] Fecha de lanzamiento
+- [ ] The fields shown in the main path for each video game (image, name, and genres)
+- [ ] Description
+- [ ] Released
 - [ ] Rating
-- [ ] Plataformas
+- [ ] Platforms
 <div align="center">
   <img width="90%" src="./deploy-images/detail.png" />
 </div>
 
-**Ruta de creación de videojuegos**: contiene
+**Video game creation route**: contains
 
-- [ ] Un formulario **controlado con JavaScript** con los siguientes campos:
-  - Nombre
-  - Descripción
-  - Fecha de lanzamiento
+- [ ] A **JavaScript controlled** form with the following fields:
+  - Name
+  - Description
+  - Released
   - Rating
-  - Imagen - con una vista previa de la imagen para poder validar una imagen correcta.
-- [ ] Posibilidad de seleccionar/agregar varios géneros
-- [ ] Posibilidad de seleccionar/agregar varias plataformas
-- [ ] Botón/Opción para crear un nuevo videojuego
+  - Image - with a preview of the image, in order to validate a correct image.
+- [ ] Ability to select/add multiple genres
+- [ ] Ability to select/add multiple platforms
+- [ ] Button/Option to create a new video game
 <div align="center">
   <img width="90%" src="./deploy-images/createVideogame.png" />
 </div>
-> El formulario de creación está validado con JavaScript y no sólo con validaciones HTML.
+> The creation form is validated with JavaScript and not just with HTML validations.
 
 ---
