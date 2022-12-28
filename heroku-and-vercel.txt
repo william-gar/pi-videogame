@@ -1,0 +1,6 @@
+Heroku - login
+https://id.heroku.com/login
+
+Deploy - Vercel
+https://pi-videogame-two.vercel.app/
+https://vercel.com/williamgarm1-gmailcom/pi-videogame
